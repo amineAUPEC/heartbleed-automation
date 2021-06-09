@@ -19,13 +19,18 @@ jobs:
         dotnet-version: 5.0.x
     - name: makedir
       run: sudo mkdir -p /home/etudiant
+
     - name: vulnerable chmod
       run: sudo chmod +x ./bash/heartbleed-vulnerable-server.sh 
     - name: vulnerable
       run: sudo ./bash/heartbleed-vulnerable-server.sh
-    - name: pentest chmod
-      run: sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
-    - name: pentest
-      run: sudo ./bash/heartbleed-vulnerable-pentest.sh
+    - name: docker image
+      run: sudo docker image ls    
+      
+      
+#     - name: pentest chmod
+#       run: sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
+#     - name: pentest
+#       run: sudo ./bash/heartbleed-vulnerable-pentest.sh
 #     - name: Test
 #       run: sudo mono main.exe
