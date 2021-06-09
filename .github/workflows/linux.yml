@@ -36,7 +36,9 @@ jobs:
        sudo apt-get update -y && sudo apt-get install -y python docker-compose
        git clone https://github.com/injcristianrojas/heartbleed-example.git
        cd heartbleed-example
-       sudo docker-compose up &
+       docker pull andrewmichaelsmith/docker-heartbleed
+       docker run -d andrewmichaelsmith/docker-heartbleed
+      #  sudo docker-compose up &
 
 
 
