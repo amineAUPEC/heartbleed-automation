@@ -17,9 +17,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    - name: makedir
+      run: mkdir -p /home/etudiant
     - name: vulnerable
-      run: sudo chmod +x ./bash/*.sh && sudo ./bash/heartbleed-vulnerable-server.sh
+      run: ./bash/*.sh && sudo ./bash/heartbleed-vulnerable-server.sh
     - name: pentest
-      run: sudo chmod +x ./bash/*.sh && sudo ./bash/heartbleed-vulnerable-pentest.sh
+      run: ./bash/*.sh && sudo ./bash/heartbleed-vulnerable-pentest.sh
 #     - name: Test
 #       run: sudo mono main.exe
