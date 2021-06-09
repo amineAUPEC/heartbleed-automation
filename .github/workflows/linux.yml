@@ -37,7 +37,7 @@ jobs:
        git clone https://github.com/injcristianrojas/heartbleed-example.git
        cd heartbleed-example
        docker pull andrewmichaelsmith/docker-heartbleed
-       docker run -d andrewmichaelsmith/docker-heartbleed
+      #  docker run -d andrewmichaelsmith/docker-heartbleed
       #  sudo docker-compose up &
 
 
