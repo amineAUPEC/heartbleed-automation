@@ -18,10 +18,10 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: makedir
-      run: mkdir -p /home/etudiant
+      run: sudo mkdir -p /home/etudiant
     - name: vulnerable
-      run: ./bash/*.sh && sudo ./bash/heartbleed-vulnerable-server.sh
+      run: sudo ./bash/heartbleed-vulnerable-server.sh
     - name: pentest
-      run: ./bash/*.sh && sudo ./bash/heartbleed-vulnerable-pentest.sh
+      run: sudo ./bash/heartbleed-vulnerable-pentest.sh
 #     - name: Test
 #       run: sudo mono main.exe
