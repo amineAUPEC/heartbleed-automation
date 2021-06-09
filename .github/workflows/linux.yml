@@ -38,7 +38,7 @@ jobs:
        cd heartbleed-example
        docker pull andrewmichaelsmith/docker-heartbleed
       #  docker run -d andrewmichaelsmith/docker-heartbleed
-      #  sudo docker-compose up &
+       sudo docker-compose up &
 
 
 
