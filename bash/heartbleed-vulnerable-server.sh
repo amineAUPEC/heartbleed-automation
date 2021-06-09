@@ -19,10 +19,10 @@ cd heartbleed-example
 
 
 
-docker-compose up -d &
+docker-compose up &
 #docker-compose up 
 ### debug
-ip a
+# ip a
 # [!NOTE]
 # A readme file is in : /markdown/heartbleed-example/README.md
 # The project is delivered with :
