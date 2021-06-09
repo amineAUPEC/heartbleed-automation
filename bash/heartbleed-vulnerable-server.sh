@@ -20,7 +20,7 @@ cd heartbleed-example
 
 
 docker-compose up -d &
-
+#docker-compose up 
 ### debug
 ip a
 # [!NOTE]
