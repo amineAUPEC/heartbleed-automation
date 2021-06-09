@@ -55,6 +55,7 @@ jobs:
     - name: pentest chmod
       run: sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
     - name: pentest after 5 min
-      run: sleep 500 && sudo ./bash/heartbleed-vulnerable-pentest.sh
+      run: sudo ./bash/heartbleed-vulnerable-pentest.sh
+      # run: sleep 500 && sudo ./bash/heartbleed-vulnerable-pentest.sh
 #     - name: Test
 #       run: sudo mono main.exe
