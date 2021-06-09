@@ -34,24 +34,18 @@ jobs:
     - name: vulnerable preparing
       run: | 
        sudo apt-get update -y && sudo apt-get install -y python docker-compose
-       git clone https://github.com/injcristianrojas/heartbleed-example.git
-       cd heartbleed-example
        docker pull andrewmichaelsmith/docker-heartbleed
-       sudo docker-compose up &
+      #  git clone https://github.com/injcristianrojas/heartbleed-example.git
+      #  cd heartbleed-example
+      #  sudo docker-compose up &
       #  docker run -d andrewmichaelsmith/docker-heartbleed
 
+    - name: vulnerable chmod
+      run: sudo chmod +x ./bash/heartbleed-vulnerable-server.sh 
 
 
-    # - name: launching docker
-    #   run:  docker-compose up
-
-
-    # - name: vulnerable chmod
-    #   run: sudo chmod +x ./bash/heartbleed-vulnerable-server.sh 
-
-
-    # - name: vulnerable
-    #   run: sudo ./bash/heartbleed-vulnerable-server.sh
+    - name: vulnerable
+      run: sudo ./bash/heartbleed-vulnerable-server.sh
 
 
     - name: docker image

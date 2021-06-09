@@ -52,7 +52,7 @@ sudo apt-get update -y && sudo apt-get install -y python
 git clone https://github.com/injcristianrojas/heartbleed-example.git
 
 cd heartbleed-example
-docker-compose up
+sudo docker-compose up
 ```
 
 > [!NOTE]
