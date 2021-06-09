@@ -20,6 +20,16 @@ cd heartbleed-example
 
 
 sudo docker-compose up &
+
+
+# - mais au préalable
+    # - mise en place du serveur vulnérable depuis le serveur docker ou un autre serveur
+# sudo apt-get install -y openssl  
+# openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt -subj "/C=FR/ST=Vitry/L=Vitry/O=Goldorak CA/OU=Green Lantern sux/CN=127.0.0.1"
+# openssl s_server -key /etc/ssl/private/apache-selfsigned.key -cert /etc/ssl/certs/apache-selfsigned.crt -accept 44330 -www
+
+
+
 #docker-compose up 
 ### debug
 # ip a
