@@ -48,7 +48,7 @@
 
 - Installation du serveur vulnérable avec un docker-compose.yml
 ```bash
-sudo apt-get update -y && apt-get install -y python
+sudo apt-get update -y && sudo apt-get install -y python
 git clone https://github.com/injcristianrojas/heartbleed-example.git
 
 cd heartbleed-example
@@ -68,7 +68,7 @@ docker-compose up
 #### Injecter de la donnée / stimuler le serveur cible
 
 ```bash
-sudo apt-get update -y && apt-get install -y python
+sudo apt-get update -y && sudo apt-get install -y python
 git clone https://github.com/injcristianrojas/heartbleed-example.git
 cd heartbleed-example
 
@@ -90,7 +90,7 @@ python stimulate_server.py -a $ip
     - script heartbleed.py
     
     ```bash
-        sudo apt-get update -y && apt-get install -y python
+        sudo apt-get update -y && sudo apt-get install -y python
         git clone https://github.com/injcristianrojas/heartbleed-example.git
         cd heartbleed-example
 
@@ -104,7 +104,7 @@ python stimulate_server.py -a $ip
 - Paquetage linux heartbleeder : *Check*
 
 ```bash
-sudo apt-get update -y && apt-get install -y heartbleeder && sudo apt-get autoremove -y
+sudo apt-get update -y && sudo apt-get install -y heartbleeder && sudo apt-get autoremove -y
 heartbleeder $ip:443
 ```
 
@@ -112,8 +112,8 @@ heartbleeder $ip:443
 -  Usage du script ssltest.py : *Check*
 
 ```bash
-apt-get update -y && apt-get install -y python
-apt-get update -y && apt-get install -y git 
+sudo apt-get update -y && sudo apt-get install -y python
+sudo apt-get update -y && sudo apt-get install -y git 
 git clone https://github.com/tdussa/heartbleed-masstest.git
 cd heartbleed-masstest
 nano hostlist.txt && chmod +x ssltest.py

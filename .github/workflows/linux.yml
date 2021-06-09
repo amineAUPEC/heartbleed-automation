@@ -20,10 +20,37 @@ jobs:
     - name: makedir
       run: sudo mkdir -p /home/etudiant
 
+    - name: check user
+      run: whoami
+
+
+    - name: dockerinstall chmod
+      run: chmod +x ./bash/install-docker.sh
+
+      
+    - name: dockerinstall test
+      run: ./bash/install-docker.sh
+
+    # - name: vulnerable preparing
+    #   run: | sudo apt-get update -y && sudo apt-get install -y python
+            # git clone https://github.com/injcristianrojas/heartbleed-example.git
+            # cd heartbleed-example
+
+
+
+
+    # - name: launching docker
+    #   run: docker-compose up 
+
+
     - name: vulnerable chmod
       run: sudo chmod +x ./bash/heartbleed-vulnerable-server.sh 
+
+
     - name: vulnerable
       run: sudo ./bash/heartbleed-vulnerable-server.sh
+
+
     - name: docker image
       run: sudo docker image ls    
       
