@@ -19,4 +19,4 @@ echo "deb [arch=amd64] https://download.docker.com/linux/debian/ stretch stable"
 # Installation de Docker
 sudo apt-get update -y
 sudo apt-get install -y docker-ce
-curl
+curl www.google.fr
