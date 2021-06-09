@@ -52,9 +52,9 @@ jobs:
       run: sudo docker image ls    
       
       
-#     - name: pentest chmod
-#       run: sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
-#     - name: pentest
-#       run: sudo ./bash/heartbleed-vulnerable-pentest.sh
+    - name: pentest chmod
+      run: sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
+    - name: pentest after 5 min
+      run: sleep 500 && sudo ./bash/heartbleed-vulnerable-pentest.sh
 #     - name: Test
 #       run: sudo mono main.exe
