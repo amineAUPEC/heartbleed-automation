@@ -129,7 +129,7 @@ cd heartbleed-automation/ && sudo chmod +x ./bash/heartbleed-vulnerable-pentest.
 nano ./conffiles/hostlist.txt && nano ./bash/heartbleed-vulnerable-pentest.sh
 # execute file
 sudo ./bash/heartbleed-vulnerable-pentest.sh
-
+cd /home/etudiant/heartbleed-example
 watch sudo python heartbleed.py 192.168.1.173 -p 443
 
 

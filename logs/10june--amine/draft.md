@@ -133,3 +133,74 @@ sudo cat  /root/.msf4/logs/framework.log
 [06/10/2021 20:26:22] [e(0)] core: /opt/metasploit-framework/embedded/framework/modules/auxiliary/gather/office365userenum.py failed to load - LoadError  Try running file manually to check for errors or dependency issues.
 [06/10/2021 20:26:25] [d(0)] core: HistoryManager.push_context name: :msfconsole
 [06/10/2021 20:26:47] [d(0)] core: HistoryManager.pop_context name: :msfconsole
+
+
+
+
+
+=====================
+check TLS options to be executed on the server
+
+openssl ciphers -v | awk '{print $2}' | sort | uniq
+
+------------------
+root@63445b775e24:/# openssl ciphers -v | awk '{print $2}' | sort | uniq
+SSLv3
+TLSv1.2
+================
+
+- msf :
+
+set TLS_VERSION 1.2
+
+=============
+
+test avec username dans le script python inject_data.py aka stimulate_server.py
+
+
+
+résultat similaire
+
+=======
+usage de la commande strings recommandé
+========
+
+- watch alternative
+while true; do jobs; sleep 10; done
+
+
+
+
+=============
+check
+
+```bash
+cd ./python/fox_heartbleedtest.py
+python fox_heartbleedtest.py 192.168.1.173 -p 443
+```
+
+192.168.1.173|VULNERABLE
+
+
+==============
+
+ 7   auxiliary/scanner/http/ssl_version                          2014-10-14       normal     No     HTTP SSL/TLS Version Detection (POODLE scanner)
+
+
+
+ auxiliary/scanner/ssl/openssl_ccs                           2014-06-05       normal     No     OpenSSL Server-Side ChangeCipherSpec Injection Scanner
+   38  auxiliary/dos/ssl/openssl_aesni                             2013-02-05       normal     No     OpenSSL TLS 1.1 and 1.2 AES-NI DoS
+
+
+
+
+   56  payload/cmd/unix/reverse_openssl                                             normal     No     Unix Command Shell, Double Reverse TCP SSL (openssl)
+
+
+payload/cmd/unix/reverse_ssl_double_telnet                                   normal     No     Unix Command Shell, Double Reverse TCP SSL (telnet)
+   58  payload/cmd/unix/reverse_ncat_ssl                                            normal     No     Unix Command Shell, Reverse TCP (via ncat)
+   59  payload/cmd/unix/reverse_bash_telnet_ssl                                     normal     No     Unix Command Shell, Reverse TCP SSL (telnet)
+   60  payload/cmd/unix/reverse_ruby_ssl                                            normal     No     Unix Command Shell, Reverse TCP SSL (via Ruby)
+   61  payload/cmd/unix/reverse_perl_ssl                                            normal     No     Unix Command Shell, Reverse TCP SSL (via perl)
+   62  payload/cmd/unix/reverse_php_ssl                                             normal     No     Unix Command Shell, Reverse TCP SSL (via php)
+   63  payload/cmd/unix/reverse_python_ssl                                          normal     No     Unix Command Shell, Reverse TCP SSL (via python)
