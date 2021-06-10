@@ -25,11 +25,11 @@ jobs:
 
 
     - name: dockerinstall chmod
-      run: chmod +x ./bash/install-docker.sh
+      run: sudo chmod +x ./bash/install-docker.sh
 
       
     - name: dockerinstall test
-      run: ./bash/install-docker.sh
+      run: sudo ./bash/install-docker.sh
 
     - name: vulnerable preparing
       run: | 

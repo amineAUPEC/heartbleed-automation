@@ -6,7 +6,7 @@ sudo apt-get update -y && sudo apt-get install -y git
 git clone https://github.com/amineAUPEC/heartbleed-automation.git
 cd heartbleed-automation
 cd bash
-chmod +x ./install-docker.sh && ./install-docker.sh  && sudo apt-get install -y docker-compose
+sudo chmod +x ./install-docker.sh && sudo ./install-docker.sh  && sudo apt-get install -y docker-compose
 
 # - Installation du serveur vulnérable avec un docker-compose.yml
 sudo apt-get update -y && sudo apt-get install -y python

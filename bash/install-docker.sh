@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ $EUID -eq 0 ]
-then
-  echo "Ne doit pas être exécuté en tant que root"
-  exit
-fi
+# if [ $EUID -eq 0 ]
+# then
+#   echo "Ne doit pas être exécuté en tant que root"
+#   exit
+# fi
 
 sudo apt-get update -y
 # Paquetages dont Docker a besoin
