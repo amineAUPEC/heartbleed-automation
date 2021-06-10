@@ -4,7 +4,8 @@ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/t
   chmod 755 msfinstall && \
   ./msfinstall -i -p "vitrygtr"
 
-ip="192.168.1.33"
+ip="192.168.1.173"
+# ip="192.168.1.33"
 
 # lancer metasploit
 # /opt/metasploit-framework/bin/msfconsole
