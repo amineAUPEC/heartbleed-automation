@@ -19,7 +19,7 @@ cd heartbleed-example
 
 
 
-sudo docker-compose up &
+sudo docker-compose up -d
 
 
 # - mais au préalable
