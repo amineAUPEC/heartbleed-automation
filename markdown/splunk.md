@@ -49,3 +49,4 @@ sudo /home/etudiant/splunk/bin/splunkd restart
 
 ou le debug refresh page
  
+ 
