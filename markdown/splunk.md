@@ -15,7 +15,7 @@ sudo /opt/splunkforwarder/bin/splunk start
 
 
 
-depuis l'interface ou en cli -> Forwarding and receiving>configure receiving>new> 9997 depuis le serveur SPLUNK
+depuis l'interface ou en cli -> Forwarding and receiving>configure receiving>new> 9997 *depuis le serveur SPLUNK*  
 sudo /opt/splunkforwarder/bin/splunk add forward-server $ip_server_splunk:9997 *mdp admin pass  abcd1234*
 
 
