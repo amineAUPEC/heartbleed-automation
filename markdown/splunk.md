@@ -26,4 +26,26 @@ sudo /opt/splunkforwarder/bin/splunk list forward-server
 
 
 sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
+
+
+sudo /opt/splunkforwarder/bin/splunk restart
+
+
+
+
+
+
+sudo systemctl set-hostname splunkclient
+
+
+
+
+sudo nano /etc/hosts
+
+
+sudo /home/etudiant/splunk/bin/splunkd restart
+
+
+
+ou le debug refresh page
  
