@@ -26,3 +26,4 @@ sudo /opt/splunkforwarder/bin/splunk list forward-server
 
 
 sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
+ 
