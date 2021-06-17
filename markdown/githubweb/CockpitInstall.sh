@@ -1,4 +1,10 @@
 #!/bin/bash
+
+#precommand
+# sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/markdown/githubweb/ && sudo chmod +x CockpitInstall.sh && sudo ./CockpitInstall.sh
+
+
+
 apt upgrade -y > /dev/null
 if [ $? -eq 0 ]
 then
