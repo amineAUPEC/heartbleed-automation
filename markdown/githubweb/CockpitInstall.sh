@@ -30,4 +30,7 @@ systemctl enable --now cockpit.socket
 
 systemctl status cockpit
 
+cd /etc/ssh/ && sed 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' -i sshd_config
+
+service sshd restart
 exit 0
