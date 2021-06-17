@@ -107,6 +107,7 @@ cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit.sh
 # ========================================================================================================================================
 # if manually installed
 ##### on all server
+sudo hostnamectl set-hostname $vmname && sudo nano /etc/hosts
 sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
 
 ##### vulnerable server part :
@@ -134,7 +135,7 @@ watch sudo python heartbleed.py 192.168.1.173 -p 443
 
 
 ################ + d'information décodée
-cd ./python/ && chmod +x exploit.python
+cd /home/etudiant/heartbleed-automation/python/ && chmod +x exploit.python
 watch sudo python exploit.py 192.168.1.173 -p 443  
 10.10.3.155
 
@@ -151,7 +152,7 @@ cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_he
   - connect to the container
    dockerps_id=$(sudo docker ps | grep heartbleed | tr -s ' ' | cut -f 1 -d ' ') 
    dockerps_id=$(sudo docker exec -it $dockerps_id bash) 
-
+- populate ssl private key on server : 
 watch /etc/apache2/ssl/apache.key
 
 watch 'cat /etc/apache2/ssl/apache.key; cat /etc/apache2/ssl/apache.crt'
