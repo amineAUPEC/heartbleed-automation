@@ -27,7 +27,13 @@
 
 
 
+===
 
+    inet6 2a01:e34:ec0c:4bd0:a00:27ff:fed9:39ab/64 scope global dynamic mngtmpaddr
+       valid_lft 86387sec preferred_lft 86387sec
+    inet6 fe80::a00:27ff:fed9:39ab/64 scope link
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1
 ====
 
 heartbleed detcetion
@@ -35,6 +41,16 @@ heartbleed detcetion
 06/17-14:37:56.354938  [**] [1:1:1] Tentative connexion ICMP [**] [Priority: 0] {IPV6-ICMP} fe80::160c:76ff:fe9d:
 
 06/17-14:47:20.414940  [**] [1:21001131:5] FOX-SRT - Suspicious - TLS-SSL Large Heartbeat Response [**] 
+
+
+
+=====
+
+Commencing packet processing (pid=1456)
+06/17-15:49:38.268440  [**] [1:1917:6] SCAN UPnP service discover attempt [**] [Classification: Dettwork Scan] [Priority: 3] {UDP} 192.168.1.40:49343 -> 239.255.255.250:1900
+
+
+06/17-16:02:39.525351  [**] [1:21001131:5] FOX-SRT - Suspicious - TLS-SSL Large Heartbeat Response [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.1.49:443 -> 192.168.1.33:60740
 
 ===
 
@@ -922,3 +938,6 @@ WARNING: /etc/snort/rules/community-web-php.rules(180) GID 1 SID 100000595 in ru
 
 
 =====
+
+
+15:16
