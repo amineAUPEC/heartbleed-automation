@@ -142,11 +142,11 @@ watch sudo python exploit.python 192.168.1.49 -p 443
 
 ##### exploit via metasploit
 sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
-cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed.sh && sudo ./metasploit_heartbleed.sh
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed.sh && sudo nano ./metasploit_heartbleed.sh && sudo ./metasploit_heartbleed.sh
 
 ##### exploit via metasploit for private KEYS
 
-cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed_keys.sh && sudo ./metasploit_heartbleed_keys.sh
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed_keys.sh && sudo nano ./metasploit_heartbleed.sh && sudo ./metasploit_heartbleed_keys.sh
 
 - verify on server:
   - connect to the container
@@ -164,3 +164,15 @@ watch 'cat /etc/apache2/ssl/apache.key; cat /etc/apache2/ssl/apache.crt'
 sudo hostnamectl set-hostname bwapp
 sudo chmod +x ./bash/install-docker.sh && sudo ./bash/install-docker.sh
 sudo docker run -d -p 80:80 -p 8443:8443 raesene/bwapp && ip a
+
+
+
+### launching snort on fw
+sudo /home/etudiant/splunk/bin/splunkd restart
+### launching splunk on splunk_server
+## config of splunk extras
+- index
+- dashboards
+- views
+### launching splunk_forwarder on fw
+sudo /opt/splunkforwarder/bin/splunk restart
