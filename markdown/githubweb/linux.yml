@@ -168,11 +168,16 @@ sudo docker run -d -p 80:80 -p 8443:8443 raesene/bwapp && ip a
 
 
 ### launching snort on fw
-sudo /home/etudiant/splunk/bin/splunkd restart
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+
+
 ### launching splunk on splunk_server
+sudo /home/etudiant/splunk/bin/splunk restart
 ## config of splunk extras
 - index
 - dashboards
 - views
+
+
 ### launching splunk_forwarder on fw
 sudo /opt/splunkforwarder/bin/splunk restart
