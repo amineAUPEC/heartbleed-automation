@@ -135,9 +135,9 @@ watch sudo python heartbleed.py 192.168.1.173 -p 443
 
 
 ################ + d'information décodée
-cd /home/etudiant/heartbleed-automation/python/ && chmod +x exploit.python
+cd /home/etudiant/heartbleed-automation/python/ && sudo chmod +x exploit.python
 watch sudo python exploit.py 192.168.1.173 -p 443  
-10.10.3.155
+#10.10.3.155
 
 
 ##### exploit via metasploit
