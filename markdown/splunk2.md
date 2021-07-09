@@ -146,10 +146,26 @@ index="*" sourcetype=snort name="ICMP Echo Reply"
 index="*" sourcetype=snort name="ICMP PING"
 index="*" sourcetype=snort name="ICMP PING Windows"
 
-
-index="*" sourcetype=snort name="Tentative connexion ICMP" 
-|  stats count(date_hour) by name
 ####  merge for ICMP
+ICMP analysis
+index="*" sourcetype=snort name="Tentative connexion ICMP" OR name="ICMP PING Windows" OR name="ICMP Echo Reply" OR name="ICMP PING" earliest=-1h
+| stats count(date_hour) by name
+
+
+```yml
+type: bar chart
+format:
+  general: 
+    afficher: minmax
+  axe ordo: 
+    intervalle:5 
+    titre:par heure
+  axe abs: 
+    titre: type de req
+```
+
+
+
 
 
 ###### snortconf 
