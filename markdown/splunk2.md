@@ -138,6 +138,18 @@ cat /var/log/snort/alert.csv
 
 https://searchitchannel.techtarget.com/feature/Snortconf-output-options
 
+##### splunk dashboard prep
+
+#### 3 initial for ICMP
+index="*" sourcetype=snort name="Tentative connexion ICMP"
+index="*" sourcetype=snort name="ICMP Echo Reply"
+index="*" sourcetype=snort name="ICMP PING"
+index="*" sourcetype=snort name="ICMP PING Windows"
+
+
+index="*" sourcetype=snort name="Tentative connexion ICMP" 
+|  stats count(date_hour) by name
+####  merge for ICMP
 
 
 ###### snortconf 
@@ -238,6 +250,8 @@ cd /var/log/snort/
 ls -ltr
 
 /usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+<!-- /usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf -A fast -->
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf -A full
 
 
 
