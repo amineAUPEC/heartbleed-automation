@@ -234,6 +234,26 @@ sudo /opt/splunkforwarder/bin/splunk list forward-server  *login admin pass  abc
 /opt/splunkforwarder/bin/splunk add monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full  
 /opt/splunkforwarder/bin/splunk add monitor /var/log/ -index snort_alert -sourcetype syslog  
 
+/opt/splunkforwarder/bin/splunk remove monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full  
+sudo /opt/splunkforwarder/bin/splunk restart   
+
+/opt/splunkforwarder/bin/splunk add monitor /var/log/snort/ -index snort_alert -sourcetype snort_alert_full  
+sudo /opt/splunkforwarder/bin/splunk restart   
+
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+chown -R snort:root snort
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+
+
+/opt/splunkforwarder/bin/splunk remove monitor /var/log/snort/ -index snort_alert -sourcetype snort_alert_full  
+sudo /opt/splunkforwarder/bin/splunk restart   
+
+/opt/splunkforwarder/bin/splunk add monitor /var/log/snort/ -index snort_alert -sourcetype syslog  
+sudo /opt/splunkforwarder/bin/splunk restart   
+
+
+rm /var/log/snort.log.1625843525
+
 sudo cat /opt/splunkforwarder/etc/apps/search/local/inputs.conf
 
 sudo /opt/splunkforwarder/bin/splunk restart   
@@ -272,8 +292,10 @@ sudo cat /var/log/syslog
 sudo cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
 /home/etudiant/splunk/bin/splunk add monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full  
 
-
-
+- beaucoup de debug non noté
+- problème de permission et de droit retiré
+- peut-être un problème de lecture du fichier car fichier corrompu
+- 
 ###### 
 
 ## splunk fix
