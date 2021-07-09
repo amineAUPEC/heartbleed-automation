@@ -227,10 +227,26 @@ export SPLUNK_HOME=/opt/splunkforwarder/
 
 sudo cat /opt/splunkforwarder/etc/apps/search/local/inputs.conf
 
-sudo /opt/splunkforwarder/bin/splunk restart 
+sudo /opt/splunkforwarder/bin/splunk restart   
 
-/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
-/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
+sudo /opt/splunkforwarder/bin/splunk list forward-server  *login admin pass  abcd1234*
+/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog  
+/opt/splunkforwarder/bin/splunk add monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full  
+/opt/splunkforwarder/bin/splunk add monitor /var/log/ -index snort_alert -sourcetype syslog  
+
+sudo cat /opt/splunkforwarder/etc/apps/search/local/inputs.conf
+
+sudo /opt/splunkforwarder/bin/splunk restart   
+sudo /opt/splunkforwarder/bin/splunk list forward-server  *login admin pass  abcd1234*
+
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+
+
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+
+
+
+/var/log# chown -R root:root snort
 
 
 - server
@@ -254,7 +270,7 @@ cd / && run-parts --report /etc/cron.hourly
 sudo cat /var/log/syslog
 /home/etudiant/splunk/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
 sudo cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
-/home/etudiant/splunk/bin/splunk add monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full
+/home/etudiant/splunk/bin/splunk add monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full  
 
 
 
