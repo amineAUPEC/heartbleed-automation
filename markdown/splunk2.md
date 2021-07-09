@@ -140,6 +140,34 @@ https://searchitchannel.techtarget.com/feature/Snortconf-output-options
 
 
 
+###### snortconf 
+https://neversecure.ca/2019/05/11/configuring-splunk-and-snort-on-your-home-network/
+
+output alert_full: alert.full
+
+
+
+
+###### snorthelp
+-c <rules> Use Rules File <rules
+-f         Turn off calls after binary log writes
+-i <if>    Listen on interface <if>
+-l <ld>    Log to directory <ld>
+
+-A         Set alert mode: fast, full, console, test or none  (alert file alerts only)
+<!-- -s         Log alert messages to syslog -->
+
+-L <file>  Log to this tcpdump file
+
+-u <uname> Run snort uid as <uname> user (or uid) after initialization
+        -U         Use UTC for timestamps
+        -v         Be verbose
+
+###### log to syslog
+
+https://serverfault.com/questions/636770/snort-not-sending-alert-log-file-to-syslog-server
+
+https://stackoverflow.com/questions/26246678/read-the-alert-log-from-snort
 ###### splunk parsing
 
 https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531
@@ -263,6 +291,12 @@ sudo /opt/splunkforwarder/bin/splunk list forward-server  *login admin pass  abc
 
 
 /usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+
+
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+
+
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf -s
 
 
 
