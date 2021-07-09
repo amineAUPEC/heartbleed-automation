@@ -115,6 +115,8 @@ u2spewfoo snort.log
   - solv use u2spewfoo
 sources : [SO] (https://stackoverflow.com/questions/27221783/snort-log-file-output-format)
 
+
+excluded
 ###### snort.conf edit
 
 
@@ -161,7 +163,7 @@ And export
 
 
 mkdir /var/log/logger
-ln -s/var/log/snort /var/log/logger
+ln -s /var/log/snort /var/log/logger
 
 
 
@@ -169,9 +171,9 @@ ln -s/var/log/snort /var/log/logger
 remove all from splunk cli After web
 
 
-reload -- débug page
+<!-- reload -- débug page -->
 
-http://localhost/en-US/debug/refresh
+<!-- http://localhost/en-US/debug/refresh -->
 
 Remove all from inputs.conf
 
@@ -184,12 +186,49 @@ Export var
 
 
 navigate to the $SPLUNK_HOME/bin/ directory and use the ./splunk
-splunk add monitor /var/log/
+splunk add monitor /var/log/logger
 
 
 
 Configure it with logger folder
-###### 
+###### recap of command
+import vm et config ip ; changer fichier /etc/hosts
+
+
+
+
+- uf
+sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -index snort_alert -sourcetype snort_alert_full 
+sudo /opt/splunkforwarder/bin/splunk restart 
+
+
+
+sudo /opt/splunkforwarder/bin/splunk list forward-server  *login admin pass  abcd1234*
+
+
+cd /var/log/snort/
+ls -ltr
+
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf
+
+
+
+- on essaye de remonter ça
+  -  snort.log.1625838993
+
+
+export SPLUNK_HOME=/opt/splunkforwarder/
+
+
+
+- server
+sudo /home/etudiant/splunk/bin/splunk restart
+export SPLUNK_HOME=/home/etudiant/splunk/
+echo $SPLUNK_HOME
+
+
+
+
 ###### 
 
 ## splunk fix
