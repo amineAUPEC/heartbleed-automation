@@ -221,11 +221,40 @@ export SPLUNK_HOME=/opt/splunkforwarder/
 
 
 
+/opt/splunkforwarder/bin/splunk remove monitor /var/log/syslog -index general -sourcetype syslog
+/opt/splunkforwarder/bin/splunk remove monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full
+
+
+sudo cat /opt/splunkforwarder/etc/apps/search/local/inputs.conf
+
+sudo /opt/splunkforwarder/bin/splunk restart 
+
+/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
+/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
+
+
 - server
 sudo /home/etudiant/splunk/bin/splunk restart
 export SPLUNK_HOME=/home/etudiant/splunk/
 echo $SPLUNK_HOME
 
+cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
+
+/home/etudiant/splunk//bin/splunk remove monitor /var/log/syslog -index general -sourcetype syslog
+/home/etudiant/splunk//bin/splunk remove monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full
+
+sudo cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
+
+sudo nano /home/etudiant/splunk/etc/apps/search/local/inputs.conf
+
+
+sudo /home/etudiant/splunk/bin/splunk restart
+
+cd / && run-parts --report /etc/cron.hourly
+sudo cat /var/log/syslog
+/home/etudiant/splunk/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
+sudo cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
+/home/etudiant/splunk/bin/splunk add monitor /var/log/snort -index snort_alert -sourcetype snort_alert_full
 
 
 
