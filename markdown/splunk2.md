@@ -377,75 +377,116 @@ then config dashboards
 and panels
 
 ## splunk tcadump
-root@debian10:~# tcpdump --version
+tcpdump --version
+su splunk
 
-tcpdump version 4.9.3 libpcap version 1.8.1
+cd etc/apps/
 
-OpenSSL 1.1.1d 10 Sep 2019
-
-root@debian10:~# su splunk
-
-splunk@debian10:~$ cd etc/apps/
+curl https://github.com/amineAUPEC/kavi_web_private/blob/main/amine_splunk_packages/ta-tcpdump-network-input-for-linux_002.tgz > ta-tcpdump-network-input-for-linux_002.tgz
 
 splunk@debian10:-/etc/apps$ tar xfz /tmp/ta_tcpdump_0.0.2.tgz
 
-splunk@debian10:~/ splunk@debian10:-/etc/apps$
+sudo /home/etudiant/splunk/bin/splunk install app ta-tcpdump-network-input-for-linux_002.tgz -update 1 -auth admin:Vitrygtr2021*
+sudo /opt/splunkforwarder/bin/splunk  install app ta-tcpdump-network-input-for-linux_002.tgz -update 1 -auth admin:abcd1234
 
-splunk@debian10:-/etc/apps$ cd TA-tcpdump/
 
-splunk@debian10:-/etc/apps/TA-tcpdumps mkdir local
 
-splunk@debian10:-/etc/apps/TA-tcpdump$ cp default/inputs.conf local/
 
-splunk@debian10:-/etc/apps/TA-tcpdump$ vi local/inputs.conf
+cd TA-tcpdump/
 
-splunk@debian10:-/etc/apps/TA-tcpdumps exit
+mkdir local
 
-logout
+cp default/inputs.conf local/
 
-root@debian10:-# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systems/system/
+vi local/inputs.conf
 
-root@debian10:~# systemctl daemon-reload
+exit
 
-root@debian10:~# systemctl enable tcpdump root@debian10:~# systemctl start tcpdump
 
-root@debian10:~# ps aux grep tcpdump
+cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
 
-root
+systemctl daemon-reload
 
-3084 0.0 0.0 12440 1876 ?
+systemctl enable tcpdump 
 
-3 and not host 127.0.0.1
+systemctl start tcpdump
 
-root
+ps -aux | grep tcpdump
 
-Ss 19:20 0:00 /usr/sbin/tcpdump -i any -pnns0 -tttt port 5
+cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump /etc/logrotate.d/
 
-3086 0.0 0.0 6076 892 pts/0 S+ 19:20 0:00 grep tcpdump
+cat /etc/logrotate.d/tcpdump
 
-root@debian10:~# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump /etc/logrotate.d/
 
-root@debian10:~# cat /etc/logrotate.d/tcpdump
+su - splunk
 
-/var/log/tcpdump.log {
+bin/splunk add forward-server 192.168.233.92:9997
+sudo /opt/splunkforwarder/bin/splunk restart 
 
-copytruncate
+- splunk_server
+sudo /home/etudiant/splunk/bin/splunk restart
 
-maxsize 1M daily
 
-}
 
-root@debian10:-# su - splunk
+- splunk dash
 
-splunk@debian10:~$ bin/splunk add forward-server 192.168.233.92:9997
+index="*" source="/var/log/tcpdump.log"
+index="*" source="/var/log/tcpdump.log" tcpdump:port53
 
-Your session is invalid. Please login.
+- splunk UF
 
-Splunk username: admin
+cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+nano /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+> /usr/sbin/tcpdump -pnns0 -i any -tttt
+>> /usr/sbin/tcpdump -pnns0 -i any -tttt port 53 and not host 127.0.0.1
+>> /usr/sbin/tcpdump -pnns0 -i any -tttt portrange 23-450 and not host 127.0.0.1
 
-Password:
 
-192.168.233.92:9997 forwarded-server already
+nano /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service 
+cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable tcpdump
+systemctl restart tcpdump
+
+
+nano /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+sudo /opt/splunkforwarder/bin/splunk restart 
+
+
+
+
+cat /opt/splunkforwarder/var/log/splunk/splunkd.log
+/opt/splunkforwarder/bin/splunk add monitor /opt/splunkforwarder/var/log/splunk/splunkd.log -index main -sourcetype splunkd  
+sudo /opt/splunkforwarder/bin/splunk restart 
+
+cat /opt/splunkforwarder/var/log/splunk/splunkd.log | grep --binary-files=text 21:03
+
+
+- splunk UF draft
+root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump# cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+/usr/sbin/tcpdump -pnns0 -i any -tttt port 53 and not host 127.0.0.1
+
+
+root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump# ls
+
+
+
+bin  default  default.old.20210711-203111  local  metadata  README  README.txt  static
+root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump# ls -al /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+
+
+-rw-rw-r-- 1 splunk splunk 69 juil. 11 20:31 /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+
+
+
+
+
+
+
+
+
 ## all tcadump screen OCR
 root@debian10:~# tcpdump --version
 
@@ -469,11 +510,27 @@ splunk@debian10:-/etc/apps/TA-tcpdump$ cp default/inputs.conf local/
 
 splunk@debian10:-/etc/apps/TA-tcpdump$ vi local/inputs.conf
 
+root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump# cat local/inputs.conf
+[script://./bin/tcpdump.path]
+interval = -1
+disabled = 1
+sourcetype = port53tttt
+
+    - the sourcetype will be renamed in the future
+sourcetype = tcpdump:port53
+
+[monitor:///var/log/tcpdump.log]
+isabled = 1
+sourcetype = port53tttt
+
+    - the sourcetype will be renamed in the future
+sourcetype = tcpdump:port53
+
 splunk@debian10:-/etc/apps/TA-tcpdumps exit
 
 logout
 
-root@debian10:-# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systems/system/
+root@debian10:-# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
 
 root@debian10:~# systemctl daemon-reload
 
