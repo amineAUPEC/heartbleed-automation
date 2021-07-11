@@ -362,7 +362,157 @@ sudo cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
 - 
 ###### 
 
-## splunk fix
+## splunk fix for Snort
+config /etc/hosts
+launch snort with another options -A fast
 
 
-  
+remove all monitors 
+add them again to monitors
+
+restart splunk services 
+
+
+then config dashboards
+and panels
+
+## splunk tcadump
+root@debian10:~# tcpdump --version
+
+tcpdump version 4.9.3 libpcap version 1.8.1
+
+OpenSSL 1.1.1d 10 Sep 2019
+
+root@debian10:~# su splunk
+
+splunk@debian10:~$ cd etc/apps/
+
+splunk@debian10:-/etc/apps$ tar xfz /tmp/ta_tcpdump_0.0.2.tgz
+
+splunk@debian10:~/ splunk@debian10:-/etc/apps$
+
+splunk@debian10:-/etc/apps$ cd TA-tcpdump/
+
+splunk@debian10:-/etc/apps/TA-tcpdumps mkdir local
+
+splunk@debian10:-/etc/apps/TA-tcpdump$ cp default/inputs.conf local/
+
+splunk@debian10:-/etc/apps/TA-tcpdump$ vi local/inputs.conf
+
+splunk@debian10:-/etc/apps/TA-tcpdumps exit
+
+logout
+
+root@debian10:-# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systems/system/
+
+root@debian10:~# systemctl daemon-reload
+
+root@debian10:~# systemctl enable tcpdump root@debian10:~# systemctl start tcpdump
+
+root@debian10:~# ps aux grep tcpdump
+
+root
+
+3084 0.0 0.0 12440 1876 ?
+
+3 and not host 127.0.0.1
+
+root
+
+Ss 19:20 0:00 /usr/sbin/tcpdump -i any -pnns0 -tttt port 5
+
+3086 0.0 0.0 6076 892 pts/0 S+ 19:20 0:00 grep tcpdump
+
+root@debian10:~# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump /etc/logrotate.d/
+
+root@debian10:~# cat /etc/logrotate.d/tcpdump
+
+/var/log/tcpdump.log {
+
+copytruncate
+
+maxsize 1M daily
+
+}
+
+root@debian10:-# su - splunk
+
+splunk@debian10:~$ bin/splunk add forward-server 192.168.233.92:9997
+
+Your session is invalid. Please login.
+
+Splunk username: admin
+
+Password:
+
+192.168.233.92:9997 forwarded-server already
+## all tcadump screen OCR
+root@debian10:~# tcpdump --version
+
+tcpdump version 4.9.3 libpcap version 1.8.1
+
+OpenSSL 1.1.1d 10 Sep 2019
+
+root@debian10:~# su splunk
+
+splunk@debian10:~$ cd etc/apps/
+
+splunk@debian10:-/etc/apps$ tar xfz /tmp/ta_tcpdump_0.0.2.tgz
+
+splunk@debian10:~/ splunk@debian10:-/etc/apps$
+
+splunk@debian10:-/etc/apps$ cd TA-tcpdump/
+
+splunk@debian10:-/etc/apps/TA-tcpdumps mkdir local
+
+splunk@debian10:-/etc/apps/TA-tcpdump$ cp default/inputs.conf local/
+
+splunk@debian10:-/etc/apps/TA-tcpdump$ vi local/inputs.conf
+
+splunk@debian10:-/etc/apps/TA-tcpdumps exit
+
+logout
+
+root@debian10:-# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systems/system/
+
+root@debian10:~# systemctl daemon-reload
+
+root@debian10:~# systemctl enable tcpdump root@debian10:~# systemctl start tcpdump
+
+root@debian10:~# ps aux grep tcpdump
+
+root
+
+3084 0.0 0.0 12440 1876 ?
+
+3 and not host 127.0.0.1
+
+root
+
+Ss 19:20 0:00 /usr/sbin/tcpdump -i any -pnns0 -tttt port 5
+
+3086 0.0 0.0 6076 892 pts/0 S+ 19:20 0:00 grep tcpdump
+
+root@debian10:~# cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump /etc/logrotate.d/
+
+root@debian10:~# cat /etc/logrotate.d/tcpdump
+
+/var/log/tcpdump.log {
+
+copytruncate
+
+maxsize 1M daily
+
+}
+
+root@debian10:-# su - splunk
+
+splunk@debian10:~$ bin/splunk add forward-server 192.168.233.92:9997
+
+Your session is invalid. Please login.
+
+Splunk username: admin
+
+Password:
+
+192.168.233.92:9997 forwarded-server already
