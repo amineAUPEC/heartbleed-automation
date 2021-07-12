@@ -480,6 +480,35 @@ sudo /opt/splunkforwarder/bin/splunk restart
 cat /opt/splunkforwarder/var/log/splunk/splunkd.log | grep --binary-files=text 21:03
 
 
+- recent inputs.conf
+root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump/local# cat inputs.conf
+#[script://./bin/tcpdump.path]
+#interval = -1
+#disabled = 1
+#sourcetype = port53tttt
+
+# the sourcetype will be renamed in the future
+#sourcetype = tcpdump:port53
+
+[monitor:///var/log/tcpdump.log]
+disabled = 0
+sourcetype = port53tttt
+
+# the sourcetype will be renamed in the future
+sourcetype = tcpdump:port53
+
+- tasks
+
+DNSINSIGHT
+
+Extraction fields or regex
+
+trouver une solution stable ou reload toutes les 2 mins via cron tcpdump
+<!-- trouver une solution stable ou reload toutes les 2 mins via cron splunk forwarder -->
+
+trouver une solution pour afficher des requetes web + détaillés voire meme avec un second file
+
+* host=firewall earliest=-4m
 
 
 
@@ -490,6 +519,18 @@ https://www.bing.com/search?q=splunkd.log&qs=n&form=QBRE&sp=-1&pq=splunkd.logs&s
 https://danielmiessler.com/study/tcpdump/
 https://docs.splunk.com/Documentation/Splunk/8.1.3/Search/Selecttimerangestoapply?ref=hk
 https://docs.splunk.com/Documentation/Splunk/8.2.0/Data/Listofpretrainedsourcetypes
+https://www.learnsplunk.com/understanding-inputsconf-in-splunk--outputsconf-in-splunk.html#:~:text=Disabled%20%3D%200%20--%3E%20if%20you%20want%20to,it%20whatever%20you%20want.just%20to%20differentiate%20log%20type
+
+> Disabled = 0 --> if you want to stop sending logs to splunk then you have to change disabled value from 0 to 1.o means monitoring enabled and 1 means monitoring disabled
+> Whitelist --> avoids sending logs with specified extension. It will drop events mentioned in blacklist
+
+https://unix.stackexchange.com/questions/411444/logrotate-dailymaxsize-is-not-rotating
+
+https://stackoverflow.com/questions/25731643/how-to-schedule-tcpdump-to-run-for-a-specific-period-of-time
+
+> You can combine -G {sec} (rotate dump files every x seconds) and -W {count} (limit # of dump files) to get what you want:
+> tcpdump -G 15 -W 1 -w myfile -i eth0 'port 8080'
+> would run for 15 seconds and then stop. Turn 1.5 hours into seconds and it should work.
 
 - splunk UF draft
 root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump# cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
