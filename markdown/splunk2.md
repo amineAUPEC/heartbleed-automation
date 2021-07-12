@@ -391,7 +391,7 @@ sudo /opt/splunkforwarder/bin/splunk  install app ta-tcpdump-network-input-for-l
 
 
 
-
+cd /opt/splunkforwarder/etc/apps/TA-tcpdump
 cd TA-tcpdump/
 
 mkdir local
@@ -405,11 +405,26 @@ exit
 
 cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
 
+
+systemctl daemon-reload
+systemctl disable tcpdump 
+systemctl stop tcpdump
+systemctl daemon-reload
+cd /etc/systemd/system/
+rm tcpdump.service
+rm /var/log/tcpdump.log
 systemctl daemon-reload
 
-systemctl enable tcpdump 
 
+systemctl daemon-reload
+cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
+cd /etc/systemd/system/
+systemctl enable tcpdump 
 systemctl start tcpdump
+systemctl stop tcpdump
+sudo /opt/splunkforwarder/bin/splunk restart 
+systemctl daemon-reload
+
 
 ps -aux | grep tcpdump
 
@@ -420,11 +435,11 @@ cat /etc/logrotate.d/tcpdump
 
 su - splunk
 
-bin/splunk add forward-server 192.168.233.92:9997
 sudo /opt/splunkforwarder/bin/splunk restart 
 
 - splunk_server
 sudo /home/etudiant/splunk/bin/splunk restart
+sudo /home/etudiant/splunk/bin/splunk boot-enable
 
 
 
@@ -433,7 +448,7 @@ sudo /home/etudiant/splunk/bin/splunk restart
 index="*" source="/var/log/tcpdump.log"
 index="*" source="/var/log/tcpdump.log" tcpdump:port53
 
-- splunk UF
+- splunk UF to modify portrange
 
 cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
 nano /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
@@ -447,7 +462,8 @@ nano /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service
 cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable tcpdump
-systemctl restart tcpdump
+systemctl start tcpdump
+systemctl status tcpdump
 
 
 nano /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
@@ -463,6 +479,17 @@ sudo /opt/splunkforwarder/bin/splunk restart
 
 cat /opt/splunkforwarder/var/log/splunk/splunkd.log | grep --binary-files=text 21:03
 
+
+
+
+
+
+- sources
+https://openclassrooms.com/forum/sujet/grep-ne-marche-plus
+https://www.bing.com/search?q=splunkd.log&qs=n&form=QBRE&sp=-1&pq=splunkd.logs&sc=1-12&sk=&cvid=221D83EED73145D9B1548D1E2CACC0B3
+https://danielmiessler.com/study/tcpdump/
+https://docs.splunk.com/Documentation/Splunk/8.1.3/Search/Selecttimerangestoapply?ref=hk
+https://docs.splunk.com/Documentation/Splunk/8.2.0/Data/Listofpretrainedsourcetypes
 
 - splunk UF draft
 root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump# cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
