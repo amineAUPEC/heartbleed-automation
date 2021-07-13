@@ -641,3 +641,13 @@ Splunk username: admin
 Password:
 
 192.168.233.92:9997 forwarded-server already
+
+## ornikar automation
+
+1..40
+count=1 screen1
+count=2 screen2
+count=3 
+count=40
+
+C:\Users\Administrateur\Pictures\imagesss\ornikar-automation\serie1\%LoopIndex%_err.png
