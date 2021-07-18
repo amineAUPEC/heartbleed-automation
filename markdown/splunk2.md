@@ -511,99 +511,267 @@ trouver une solution pour afficher des requetes web + détaillés voire meme ave
 * host=firewall earliest=-4m
 
 
-## tasks recap before dim 18 jui 21
+## tasks recap before doing dim 18 jui 21   
 
-### Download and Install Dnsinsight
 
-### Extraction fields or regex
+
+
+### Download and Install Dnsinsight  
+reconfigurer le sourcetype
+### starting and launching slunk server/UF  
+
+- SERVER  
+sudo /home/etudiant/splunk/bin/splunk restart  
+
+  - Installing DNS INSIGHT  
+  cd /home/etudiant && sudo /home/etudiant/splunk/bin/splunk install app dns-insight_007.tgz -update 1 -auth admin:Vitrygtr2021*  
+
+
+
+- UF  
+sudo /opt/splunkforwarder/bin/splunk restart   
+
+- snort for later  
+/usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf -A full  
+
+
+
 
 ### trouver une solution stable ou reload toutes les 2 mins via cron tcpdump
 
-#### with file -G rotate or even -C count file size
- /usr/sbin/tcpdump -i any -pnns0 -tttt portrange 23-450 and not host 127.0.0.1
+#### with file -G rotate or even -C count file size  
+ /usr/sbin/tcpdump -i any -pnns0 -tttt portrange 23-450 and not host 127.0.0.1  
 
-tcpdump -G 15 -W 1 -w myfile -i eth0 'port 8080'
-tcpdump -G 120 -W 1
-
-
-Not these above because  **-G 120 -W 1 -w** file because it's require a file
-
-#### crontab
-sudo crontab -e
-
-create a file for the script
-/root/crontab-tcpdump.sh
-chmod it
+tcpdump -G 15 -W 1 -w myfile -i eth0 'port 8080'  
+tcpdump -G 120 -W 1  
 
 
+Not these above because  **-G 120 -W 1 -w** file because it's require a file  
+https://www.bing.com/search?q=reload+command+each+seconds&qs=n&form=QBRE&sp=-1&pq=reload+command+each+second&sc=1-26&sk=&cvid=1C8E2B60CE3947F285230B5CFF1A5108  
+#### crontab  
+sudo crontab -e  
 
-sudo crontab -l
-
-2 * * * * /root/crontab-tcpdump.sh
-
-
-### trouver une solution pour afficher des requetes web + détaillés voire meme avec un second file ou par protocole/ports
-* host=firewall earliest=-4m
-
-
-#### capture http get traffic
-How to capture All incoming  HTTP GET  traffic (or) requests
-tcpdump -i enp0s8 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'
-
-
-why :
-G	47
-E	45
-T	54
-Space	20
-
-
-- sources : https://www.middlewareinventory.com/blog/tcpdump-capture-http-get-post-requests-apache-weblogic-websphere/
-
-https://danielmiessler.com/study/tcpdump/
-
-Here are some additional ways to tweak how you call tcpdump.
-
--X : Show the packet’s contents in both hex and ascii.
--XX : Same as -X, but also shows the ethernet header.
--D : Show the list of available interfaces
--l : Line-readable output (for viewing as you save, or sending to other commands)
--q : Be less verbose (more quiet) with your output.
--t : Give human-readable timestamp output.
--tttt : Give maximally human-readable timestamp output.
--i eth0 : Listen on the eth0 interface.
--vv : Verbose output (more v’s gives more output).
--c : Only get x number of packets and then stop.
--s : Define the snaplength (size) of the capture in bytes. Use -s0 to get everything, unless you are intentionally capturing less.
--S : Print absolute sequence numbers.
--e : Get the ethernet header as well.
--q : Show less protocol information.
--E : Decrypt IPSEC traffic by providing an encryption key.
-### Create splunk dashboard default true
-### Relancer les attaques Heartbleed
-### Do screenshot
-
-
-### not did
-#### pcap analyzer
-https://splunkbase.splunk.com/app/2748/#/details
-https://blog.owaspvit.com/2021/01/wireshark-vs-tcpdump.html
-
- /usr/sbin/tcpdump -i any -pnns0 -tttt portrange 23-450 and not host 127.0.0.1 -W 1 -w /home/etudiant/18juil-2.pcap
+create a file for the script  
+/root/crontab-tcpdump.sh  
+chmod it   
 
 
 
-https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531
-https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531
-https://community.splunk.com/t5/Getting-Data-In/Why-is-my-sourcetype-not-parsing-as-CSV-and-am-getting-two/m-p/244469
+sudo crontab -l  
+
+2 * * * * /root/crontab-tcpdump.sh  
+
+##### to do  
+sudo crontab -e  
+
+pas eu la peine
+
+### **Extraction fields or regex** 
+#### request http if
+18/07/2021 17:58:52,141	
+2021-07-18 17:58:52.141878 IP 208.97.177.124.80 > 192.168.1.23.36468: Flags [P.], seq 1:553, ack 74, win 29, length 552: HTTP: HTTP/1.1 200 OK
+
+##### tcp http request if
+2021-07-18 17:58:52.141896 IP 192.168.1.23.36468 > 208.97.177.124.80: Flags [.], ack 553, win 501, length 0
+
+#### request DNS if
+
+
+2021-07-18 18:01:49.222505 IP 192.168.1.23.40421 > 192.168.1.254.53: 29064+ A? perdu.com. (27)
+2021-07-18 18:01:49.251520 IP 192.168.1.254.53 > 192.168.1.23.40421: 29064 1/0/0 A 208.97.177.124 (43)
+2021-07-18 18:01:49.252642 IP 192.168.1.23.48643 > 192.168.1.254.53: 25125+ AAAA? perdu.com. (27)
+2021-07-18 18:01:49.261340 IP 192.168.1.254.53 > 192.168.1.23.48643: 25125 0/1/0 (88)
+2021-07-18 18:01:49.261701 IP 192.168.1.23.43893 > 192.168.1.254.53: 47842+ MX? perdu.com. (27)
+2021-07-18 18:01:49.357033 IP 192.168.1.254.53 > 192.168.1.23.43893: 47842 0/1/0 (88)
+
+CNAME
+18/07/2021 18:05:23,379	
+2021-07-18 18:05:23.379633 IP 192.168.1.254.53 > 192.168.1.119.55826: 56043 2/1/0 CNAME asimov.vortex.data.trafficmanager.net., CNAME global.vortex.data.trafficmanager.net. (173)
+
+
+
+##### DNSQUERY analysis : request DNS if
+
+sourcetype=tshark:port53 OR sourcetype=port53tttt src=* dest=*| fields dns_len query length reply_code Len message_type record_type transport | search message_type=QUERY 
+| table *
+#### request UDP HTTPS IPV6 if
+
+2021-07-18 18:01:54.883185 IP6 2a00:1450:4007:809::200e.443 > 2a01:e0a:e2:e940:913d:1c33:65d9:d9a7.52189: UDP, length 25
+
+
+
+
+##### request TCP HTTPS IPV6 if : Win ack
+2021-07-18 18:01:46.770861 IP6 2a01:e0a:e2:e940:913d:1c33:65d9:d9a7.64093 > 2a00:1450:4007:809::200e.443: Flags [S], seq 1795020359, win 64800, options [mss 1440,nop,wscale 8,nop,nop,sackOK], length 0
+2021-07-18 18:01:46.803744 IP6 2a00:1450:4007:809::200e.443 > 2a01:e0a:e2:e940:913d:1c33:65d9:d9a7.64093: Flags [S.], seq 3182824182, ack 1795020360, win 65535, options [mss 1440,nop,nop,sackOK,nop,wscale 8], length 0
+
+
+
+
+####  LIST OF COMMANDS
+tcpdump
+* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log"
+tcpdump DNS 
+* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" *.53
+
+
+tcpdump PORT 80 HTTP
+* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" *.80
+tcpdump PORT 443 HTTPS
+* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" *.443
+tcpdump HTTPS IPV6 UDP
+* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" UDP
+* 
+tcpdump HTTPS IPV6 TCP  Win ack
+* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" win OR ack
+
+DNS QUERY
+* sourcetype=tshark:port53 OR sourcetype=port53tttt src=* dest=*| fields dns_len query length reply_code Len message_type record_type transport | search message_type=QUERY 
+| table *
+#### ports 22 non monitoré (trop de traffic) ports 23 à 450
+
+
+ps -aux | grep tcp
+
+
+
+
+
+#### pas de port icmp particulier
+https://www.howtouselinux.com/post/icmp-port-number
+
+
+- PARAMS:
+- -pnns0 
+AFFICHE sous forme d'adresse IP
+#### DNS explain AAAA CNAME
+A = translate ipv4 into human name
+CNAME for subdomain
+MX mail exchange
+
+https://www.pbrumby.com/2018/05/09/dns-records-explained/
+
+
+
+0.18 sec for DNS query failure
+#### tracked ports
+
+HTTPS + DNS + HTTP
+
+*23	Telnet*
+25	Simple Mail Transfer Protocol (SMTP)
+29	MSG ICP
+37	Time
+42	Host Name Server (Nameserv)
+43	WhoIs
+49	Login Host Protocol (Login)
+**53	Domain Name System (DNS)**
+**69	Trivial File Transfer Protocol (TFTP)**
+70	Gopher Services
+79	Finger
+**80	HTTP**
+103	X.400 Standard
+108	SNA Gateway Access Server
+109	POP2
+110	POP3
+*115	Simple File Transfer Protocol (SFTP)*
+118	SQL Services
+119	Newsgroup (NNTP)
+137	NetBIOS Name Service
+*139	NetBIOS Datagram Service*
+143	Interim Mail Access Protocol (IMAP)
+150	NetBIOS Session Service
+156	SQL Server
+161	SNMP
+179	Border Gateway Protocol (BGP)
+190	Gateway Access Control Protocol (GACP)
+194	Internet Relay Chat (IRC)
+197	Directory Location Service (DLS)
+389	Lightweight Directory Access Protocol (LDAP)
+396	Novell Netware over IP
+**443	HTTPS**
+444	Simple Network Paging Protocol (SNPP)
+*445	Microsoft-DS*
+
+
+
+
+
+sources: https://www.webopedia.com/reference/well-known-tcp-port-numbers/#:~:text=The%20following%20list%20of%20well-known%20port%20numbers%20specifies,%28also%20called%20private%20ports%29%20are%2049152%20to%2065535
+
+
+Pas de serveur SQL ; MAIL ; FTP ; LDAP; SNMP ; SAMBA (445 sauf Windows) /139 ; telnet
+### trouver une solution pour afficher des requetes web + détaillés voire meme avec un second file ou par protocole/ports  NotOnSplunk
+* host=firewall earliest=-4m  
+
+
+#### capture http get traffic  juste photo
+How to capture All incoming  HTTP GET  traffic (or) requests  
+tcpdump -i enp0s8 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'  
+
+
+why :  
+G	47  
+E	45  
+T	54  
+Space	20  
+
+
+- sources : https://www.middlewareinventory.com/blog/tcpdump-capture-http-get-post-requests-apache-weblogic-websphere/  
+
+https://danielmiessler.com/study/tcpdump/  
+
+Here are some additional ways to tweak how you call tcpdump.  
+  -A     Print each packet (minus its link level header) in ASCII.  Handy for capturing web pages.
+
+-X : Show the packet’s contents in both hex and ascii.  
+-XX : Same as -X, but also shows the ethernet header.  
+-D : Show the list of available interfaces  
+-l : Line-readable output (for viewing as you save, or sending to other commands)  
+-q : Be less verbose (more quiet) with your output.  
+-t : Give human-readable timestamp output.  
+-tttt : Give maximally human-readable timestamp output.  
+-i eth0 : Listen on the eth0 interface.  
+-vv : Verbose output (more v’s gives more output).  
+-c : Only get x number of packets and then stop.  
+-s : Define the snaplength (size) of the capture in bytes. Use -s0 to get everything, unless you are intentionally capturing less.  
+-S : Print absolute sequence numbers.  
+-e : Get the ethernet header as well.  
+-q : Show less protocol information.  
+-E : Decrypt IPSEC traffic by providing an encryption key.  
+### Create splunk dashboard default true  
+### **Relancer les attaques Heartbleed**
+### Do screenshot  
+
+
+### not did  
+#### pcap analyzer  
+https://splunkbase.splunk.com/app/2748/#/details  
+https://blog.owaspvit.com/2021/01/wireshark-vs-tcpdump.html  
+
+ /usr/sbin/tcpdump -i any -pnns0 -tttt portrange 23-450 and not host 127.0.0.1 -W 1 -w /home/etudiant/18juil-2.pcap  
+
+
+
+https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531  
+https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531  
+https://community.splunk.com/t5/Getting-Data-In/Why-is-my-sourcetype-not-parsing-as-CSV-and-am-getting-two/m-p/244469  
+
+
+ -pnns0   
+https://community.splunk.com/t5/Getting-Data-In/Unable-to-ingest-the-syslog-data-into-splunk/m-p/483216  
+
+voir + haut pour pnns0
+
+https://github.com/firnsy/barnyard2/issues/127  
 
 - sources
-https://openclassrooms.com/forum/sujet/grep-ne-marche-plus
-https://www.bing.com/search?q=splunkd.log&qs=n&form=QBRE&sp=-1&pq=splunkd.logs&sc=1-12&sk=&cvid=221D83EED73145D9B1548D1E2CACC0B3
-https://danielmiessler.com/study/tcpdump/
-https://docs.splunk.com/Documentation/Splunk/8.1.3/Search/Selecttimerangestoapply?ref=hk
-https://docs.splunk.com/Documentation/Splunk/8.2.0/Data/Listofpretrainedsourcetypes
-https://www.learnsplunk.com/understanding-inputsconf-in-splunk--outputsconf-in-splunk.html#:~:text=Disabled%20%3D%200%20--%3E%20if%20you%20want%20to,it%20whatever%20you%20want.just%20to%20differentiate%20log%20type
+https://openclassrooms.com/forum/sujet/grep-ne-marche-plus  
+https://www.bing.com/search?q=splunkd.log&qs=n&form=QBRE&sp=-1&pq=splunkd.logs&sc=1-12&sk=&cvid=221D83EED73145D9B1548D1E2CACC0B3  
+https://danielmiessler.com/study/tcpdump/  
+https://docs.splunk.com/Documentation/Splunk/8.1.3/Search/Selecttimerangestoapply?ref=hk  
+https://docs.splunk.com/Documentation/Splunk/8.2.0/Data/Listofpretrainedsourcetypes  
+https://www.learnsplunk.com/understanding-inputsconf-in-splunk--outputsconf-in-splunk.html#:~:text=Disabled%20%3D%200%20--%3E%20if%20you%20want%20to,it%20whatever%20you%20want.just%20to%20differentiate%20log%20type  
 
 > Disabled = 0 --> if you want to stop sending logs to splunk then you have to change disabled value from 0 to 1.o means monitoring enabled and 1 means monitoring disabled
 > Whitelist --> avoids sending logs with specified extension. It will drop events mentioned in blacklist
@@ -631,6 +799,30 @@ root@firewall:/opt/splunkforwarder/etc/apps/TA-tcpdump# ls -al /opt/splunkforwar
 
 -rw-rw-r-- 1 splunk splunk 69 juil. 11 20:31 /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
 
+
+
+
+
+
+
+
+
+
+### **more attacks**
+
+
+### splunk links
+http://splunk:8000/fr-FR/app/search/idps
+
+http://splunk:8000/fr-FR/app/search/search?earliest=-15m&latest=now&sid=1626623210.25&q=search%20*%20host%3Dfirewall%20sourcetype%3D%22tcpdump%3Aport53%22%20source%3D%22%2Fvar%2Flog%2Ftcpdump.log%22&display.page.search.mode=fast&dispatch.sample_ratio=1&workload_pool=
+
+http://splunk:8000/fr-FR/app/search/search?earliest=-15m&latest=now&sid=1626623197.15&q=search%20*%20host%3Dfirewall%20sourcetype%3D%22tcpdump%3Aport53%22%20source%3D%22%2Fvar%2Flog%2Ftcpdump.log%22&display.page.search.mode=fast&dispatch.sample_ratio=1&display.page.search.tab=patterns&display.page.search.patterns.sensitivity=0.5&workload_pool=
+
+
+http://splunk:8000/fr-FR/app/search/search?q=search%20*%20sourcetype%3D%22tcpdump%3Aport53%22&display.page.search.mode=smart&dispatch.sample_ratio=1&workload_pool=&earliest=-15m&latest=now&sid=1626623182.14
+
+
+http://splunk:8000/fr-FR/app/search/search?q=search%20*%20host%3Dfirewall%20earliest%3D-5m%20source%3D%22%2Fvar%2Flog%2Ftcpdump.log%22&display.page.search.mode=smart&dispatch.sample_ratio=1&workload_pool=&earliest=-15m&latest=now&display.page.search.tab=events&sid=1626628621.425
 
 
 
