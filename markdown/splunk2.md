@@ -497,7 +497,7 @@ sourcetype = port53tttt
 # the sourcetype will be renamed in the future
 sourcetype = tcpdump:port53
 
-- tasks
+## future tasks next time for dim 18 juil 21
 
 DNSINSIGHT
 
@@ -511,7 +511,66 @@ trouver une solution pour afficher des requetes web + détaillés voire meme ave
 * host=firewall earliest=-4m
 
 
+## tasks recap before dim 18 jui 21
 
+### Download and Install Dnsinsight
+
+### Extraction fields or regex
+
+### trouver une solution stable ou reload toutes les 2 mins via cron tcpdump
+tcpdump -G 15 -W 1 -w myfile -i eth0 'port 8080'
+tcpdump -G 120 -W 1
+### trouver une solution pour afficher des requetes web + détaillés voire meme avec un second file ou par protocole/ports
+* host=firewall earliest=-4m
+
+
+#### capture http get traffic
+How to capture All incoming  HTTP GET  traffic (or) requests
+tcpdump -i enp0s8 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'
+
+
+why :
+G	47
+E	45
+T	54
+Space	20
+
+
+- sources : https://www.middlewareinventory.com/blog/tcpdump-capture-http-get-post-requests-apache-weblogic-websphere/
+
+https://danielmiessler.com/study/tcpdump/
+
+Here are some additional ways to tweak how you call tcpdump.
+
+-X : Show the packet’s contents in both hex and ascii.
+-XX : Same as -X, but also shows the ethernet header.
+-D : Show the list of available interfaces
+-l : Line-readable output (for viewing as you save, or sending to other commands)
+-q : Be less verbose (more quiet) with your output.
+-t : Give human-readable timestamp output.
+-tttt : Give maximally human-readable timestamp output.
+-i eth0 : Listen on the eth0 interface.
+-vv : Verbose output (more v’s gives more output).
+-c : Only get x number of packets and then stop.
+-s : Define the snaplength (size) of the capture in bytes. Use -s0 to get everything, unless you are intentionally capturing less.
+-S : Print absolute sequence numbers.
+-e : Get the ethernet header as well.
+-q : Show less protocol information.
+-E : Decrypt IPSEC traffic by providing an encryption key.
+### Create splunk dashboard default true
+### Relancer les attaques Heartbleed
+### Do screenshot
+
+
+### not did
+#### pcap analyzer
+https://splunkbase.splunk.com/app/2748/#/details
+https://blog.owaspvit.com/2021/01/wireshark-vs-tcpdump.html
+
+
+https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531
+https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531
+https://community.splunk.com/t5/Getting-Data-In/Why-is-my-sourcetype-not-parsing-as-CSV-and-am-getting-two/m-p/244469
 
 - sources
 https://openclassrooms.com/forum/sujet/grep-ne-marche-plus
