@@ -567,6 +567,20 @@ sudo crontab -e
 pas eu la peine
 
 ### **Extraction fields or regex** 
+
+
+https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Regex
+
+###### unit test
+\.80$
+
+test string
+10.80.20.20.80
+50.125.120.80
+
+10p80.20.20p80
+50.125.120p80
+
 #### request http if
 18/07/2021 17:58:52,141	
 2021-07-18 17:58:52.141878 IP 208.97.177.124.80 > 192.168.1.23.36468: Flags [P.], seq 1:553, ack 74, win 29, length 552: HTTP: HTTP/1.1 200 OK
@@ -739,9 +753,9 @@ Here are some additional ways to tweak how you call tcpdump.
 -e : Get the ethernet header as well.  
 -q : Show less protocol information.  
 -E : Decrypt IPSEC traffic by providing an encryption key.  
-### Create splunk dashboard default true  
+### **Create splunk dashboard default true**  
 ### **Relancer les attaques Heartbleed**
-### Do screenshot  
+### **Do screenshot**  
 
 
 ### not did  
