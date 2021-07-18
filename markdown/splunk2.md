@@ -518,8 +518,30 @@ trouver une solution pour afficher des requetes web + détaillés voire meme ave
 ### Extraction fields or regex
 
 ### trouver une solution stable ou reload toutes les 2 mins via cron tcpdump
+
+#### with file -G rotate or even -C count file size
+ /usr/sbin/tcpdump -i any -pnns0 -tttt portrange 23-450 and not host 127.0.0.1
+
 tcpdump -G 15 -W 1 -w myfile -i eth0 'port 8080'
 tcpdump -G 120 -W 1
+
+
+Not these above because  **-G 120 -W 1 -w** file because it's require a file
+
+#### crontab
+sudo crontab -e
+
+create a file for the script
+/root/crontab-tcpdump.sh
+chmod it
+
+
+
+sudo crontab -l
+
+2 * * * * /root/crontab-tcpdump.sh
+
+
 ### trouver une solution pour afficher des requetes web + détaillés voire meme avec un second file ou par protocole/ports
 * host=firewall earliest=-4m
 
@@ -566,6 +588,9 @@ Here are some additional ways to tweak how you call tcpdump.
 #### pcap analyzer
 https://splunkbase.splunk.com/app/2748/#/details
 https://blog.owaspvit.com/2021/01/wireshark-vs-tcpdump.html
+
+ /usr/sbin/tcpdump -i any -pnns0 -tttt portrange 23-450 and not host 127.0.0.1 -W 1 -w /home/etudiant/18juil-2.pcap
+
 
 
 https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531
