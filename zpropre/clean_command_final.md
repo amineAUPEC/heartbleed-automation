@@ -28,6 +28,10 @@ sudo crontab -l
 - home page
 http://splunk:8000/fr-FR/app/launcher/home
 
+- splunk license
+http://splunk:8000/fr-FR/manager/system/licensing
+
+
 - TOP DNS QUERIES
 http://splunk:8000/fr-FR/app/DNS_Insight/top_queries?earliest=-2m&latest=now&form.src=*&form.dest=*
 

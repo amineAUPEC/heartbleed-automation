@@ -137,7 +137,7 @@ snort local rules
 
 ## 3 paquets splunk
 
-## usage de openssl srever en tant que serveur web
+## usage de openssl server en tant que serveur web
 
 et usage de openssl cie
 
@@ -158,7 +158,7 @@ sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -ind
 
 
 ### possibilité d'analyser les pcaps avec splunk
-## configuration du'n service pour tecpdump 
+## configuration d'un service pour tcpdump 
 
 ### et relancer de force avec crontab
 
@@ -172,3 +172,8 @@ sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -ind
 
 
 ## docker heartbleed lab et exploitdb
+
+
+
+## gestionnaire web de firewall
+abandonné car snort le gère et manque de temps
