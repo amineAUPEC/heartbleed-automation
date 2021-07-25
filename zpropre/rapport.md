@@ -88,7 +88,6 @@ sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -ind
 
 
 ### possibilité d'analyser les pcaps avec splunk
-## configuration d'un service pour tcpdump 
 
 ### et relancer de force avec crontab
 
@@ -301,7 +300,7 @@ sudo /opt/splunkforwarder/bin/splunk list forward-server
 
 On peut vérifier les fichiers surveillées dans /opt/splunkforwarder/etc/apps/search/local/inputs.conf
 
-On isnatlle l'application TA-tcpdump https://splunkbase.splunk.com/app/4818/#/details
+On installe l'application TA-tcpdump https://splunkbase.splunk.com/app/4818/#/details
 
 
 
