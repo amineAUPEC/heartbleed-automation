@@ -113,7 +113,8 @@ watch -n 1 sudo python /home/etudiant/heartbleed-automation/python/exploit.py 19
 
 
 ##### pentest server -- exploit via metasploit
-sudo /home/etudiant/heartbleed-automation/bash/msf/metasploit_heartbleed.sh
+<!-- sudo /home/etudiant/heartbleed-automation/bash/msf/metasploit_heartbleed.sh -->
+sudo /home/etudiant/heartbleed-automation/bash/msf/metasploit_heartbleed_loop.sh
 
 
 
