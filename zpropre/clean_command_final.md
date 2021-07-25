@@ -1,6 +1,6 @@
 ## splunk server start
 
-sudo /home/etudiant/splunk/bin/splunk restart 
+<!-- sudo /home/etudiant/splunk/bin/splunk restart  -->
 sudo /home/etudiant/splunk/bin/splunk start 
 
 
@@ -10,7 +10,7 @@ sudo /opt/splunkforwarder/bin/splunk restart
 sudo /opt/splunkforwarder/bin/splunk stop 
 
 
-<<< vitrygtr
+<!-- <<< vitrygtr -->
 
 ###### troubleshoot tcadump
 ps -aux | grep tcpdump

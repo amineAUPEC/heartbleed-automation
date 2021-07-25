@@ -9,7 +9,6 @@ https://meritis.fr/comment-fonctionne-splunk/
 
 
 
-
 https://docs.splunk.com/Documentation/Splunk/8.1.3/SearchTutorial/Aboutthesearchapp
 
 
@@ -35,3 +34,40 @@ index=_internal per_index_thruput earliest=-60d@d latest=now | timechart span=1d
 
 
 https://community.splunk.com/t5/Archive/Licence-violation-don-t-understand-why/m-p/439275
+
+
+## heartbleed attaque
+https://asecuritysite.com/encryption/heart2
+https://www.exploit-db.com/docs/49313
+
+## sql injection
+https://docs.zeek.org/en/current/scripting/index.html#detecting-sql-injection-attacks
+## idps
+
+https://droidcops.com/protect-your-network-with-ids-ips-systems-2020/
+https://www.forcepoint.com/cyber-edu/intrusion-prevention-system-ips
+
+
+https://www.ossec.net/
+
+
+## webterminal
+
+https://github.com/WalkerWang731/WebTerminal
+
+## docker
+https://docs.docker.com/compose/gettingstarted/
+
+
+
+
+### docker
+https://stackoverflow.com/questions/45109398/how-can-i-make-docker-compose-bind-the-containers-only-on-defined-network-instea
+
+
+## git 
+https://www.youtube.com/watch?v=gp_k0UVOYMw
+# others
+https://pdfcrowd.com/#convert_by_input
+https://stackoverflow.com/questions/30573696/how-to-convert-local-html-to-pdf
+https://github.com/search?q=html+generate+pdf+locally&type=Repositories
