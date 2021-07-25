@@ -566,13 +566,14 @@ sudo crontab -e
 
 pas eu la peine
 
-### **Extraction fields or regex** 
+### *Extraction fields or regex* 
 
 
 https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Regex
 
 ###### unit test
 \.80$
+80$
 
 test string
 10.80.20.20.80
@@ -753,7 +754,9 @@ Here are some additional ways to tweak how you call tcpdump.
 -e : Get the ethernet header as well.  
 -q : Show less protocol information.  
 -E : Decrypt IPSEC traffic by providing an encryption key.  
-### **Create splunk dashboard default true**  
+### 
+
+Create splunk dashboard default true
 ### **Relancer les attaques Heartbleed**
 ### **Do screenshot**  
 
@@ -931,13 +934,3 @@ Splunk username: admin
 Password:
 
 192.168.233.92:9997 forwarded-server already
-
-## ornikar automation
-
-1..40
-count=1 screen1
-count=2 screen2
-count=3 
-count=40
-
-C:\Users\Administrateur\Pictures\imagesss\ornikar-automation\serie1\%LoopIndex%_err.png
