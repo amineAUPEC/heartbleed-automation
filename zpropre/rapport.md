@@ -15,11 +15,7 @@
 
 
 
-###### log to syslog
 
-https://serverfault.com/questions/636770/snort-not-sending-alert-log-file-to-syslog-server
-
-https://stackoverflow.com/questions/26246678/read-the-alert-log-from-snort
 
 
 ###### splunk parsing
@@ -44,69 +40,7 @@ sourcetype=VeryLargeCSVFile
 Voir github voici le lien
 
 
-## installer splunk GITHUB
 
-
-go to https://www.splunk.com/en_us/download/universal-forwarder.html  
-sudo apt-get update -y  
-sudo apt-get install -y wget  
-wget -O splunkforwarder-8.2.0-e053ef3c985f-linux-2.6-amd64.deb 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=8.2.0&product=universalforwarder&filename=splunkforwarder-8.2.0-e053ef3c985f-linux-2.6-amd64.deb&wget=true'  
-
-
-
-sudo apt-get install -y curl  
-sudo dpkg -i splunkforwarder-8.2.0-e053ef3c985f-linux-2.6-amd64.deb  
-
-sudo /opt/splunkforwarder/bin/splunk enable boot-start  
-
-
-sudo /opt/splunkforwarder/bin/splunk start
-
-
-
-depuis l'interface ou en **cli** -> Forwarding and receiving>configure receiving>new> 9997 *depuis le serveur SPLUNK*   
-sudo /opt/splunkforwarder/bin/splunk add forward-server $ip_server_splunk:9997 *mdp admin pass  abcd1234*
-
-
-sudo /opt/splunkforwarder/bin/splunk edit user admin -password abcd1234
-
-
-sudo /opt/splunkforwarder/bin/splunk list forward-server
-
-
-sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/syslog -index general -sourcetype syslog
-
-
-
-
-sudo systemctl set-hostname splunkclient
-
-sudo nano /etc/hosts
-
-
-sudo /home/etudiant/splunk/bin/splunkd restart
-
-
-## snort conf log output for splunk
-
-There are by default 28 fields available for log analysis that include timestamp, sig_generator, sig_id, sig_rev, msg, proto etc. For understanding Snort Log Management i recommend to read "Managing Snort Alerts"
-
-https://security.stackexchange.com/questions/29603/what-type-of-data-does-snort-log
-
-###### snortconf output
-- first sol
-  output alert_fast: alert.fast output alert_full: alert.full output alert_syslog: LOG AUTH LOG_ALERT 
-
--  second sol :
-output alert_csv: alert.csv default
-
-cat /var/log/snort/alert.csv 
-
-https://searchitchannel.techtarget.com/feature/Snortconf-output-options
-
-
-
-## tcpdump
 
 
 ## splunk dashboard par ports
@@ -122,26 +56,22 @@ le reste = toutes les 15 dernières minutes
 
 earliest=-2m 2 min de décalage de tcpdump
 
-## rétrograder vers debian wheezy 7
+## snort local rules
+
+
+https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/zpropre/snort-rules/local.rules
+
+
+
+### heartbleed :
+
+#HEART-BLEED-ALERTS : time of detection reduced
+alert tcp any any -> any any (msg:"FOX-SRT - Flowbit - TLS-SSL Client Hello"; flow:established; dsize:< 500; content:"|16 03|"; depth:2; byte_test:1, <=, 2, 3; byte_test:1, !=, 2, 1; content:"|01|"; offset:5; depth:1; content:"|03|"; offset:9; byte_test:1, <=, 3, 10; byte_test:1, !=, 2, 9; content:"|00 0f 00|"; flowbits:set,foxsslsession; flowbits:noalert; threshold:type limit, track by_src, count 1, seconds 60; reference:cve,2014-0160; classtype:bad-unknown; sid: 21001130; rev:9;)
+alert tcp any any -> any any (msg:"FOX-SRT - Suspicious - TLS-SSL Large Heartbeat Response"; flow:established; flowbits:isset,foxsslsession; content:"|18 03|"; depth: 2; byte_test:1, <=, 3, 2; byte_test:1, !=, 2, 1; byte_test:2, >, 200, 3; threshold:type limit, track by_src, count 1, seconds 600; reference:cve,2014-0160; classtype:bad-unknown; sid: 21001131; rev:5;)
 
 
 
 
-
-snort local rules
-
-
-snort local rules
-
-
-
-## 3 paquets splunk
-
-## usage de openssl server en tant que serveur web
-
-et usage de openssl cie
-
-openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server extension"
 
 
 
@@ -151,7 +81,7 @@ openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server ex
 
 cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
 
-### ou ajour de serveur avec add monitor
+### ou ajout de serveur avec add monitor
 sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -index snort_alert -sourcetype snort_alert_full
 
 ### configuration de l'interface des vues, des recherches, filtres des champs par regex/délimiteurs
@@ -166,13 +96,9 @@ sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -ind
 
 
 ## version tls
-
+https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/cheatsheet/tls_version.md
 
 ## usage de github workflows pour une intégration CI/CD
-
-
-## docker heartbleed lab et exploitdb
-
 
 
 ## gestionnaire web de firewall
@@ -275,7 +201,7 @@ Ensuite, nous lançons la collecte des données sur l'Universal Forwarder, cela 
 
 
 
-## 
+##  Scénario général pour exploiter la vulnérabilité Heartbleed
 
 On lance le serveur vulnérable avec OpenSSL dans notre cas suite à des problèmes pour rétrograder, nous avons décidé de passer par un conteneur Docker. Qui intègre aussi un serveur web Apache.
 
@@ -336,7 +262,142 @@ sudo /home/etudiant/heartbleed-automation/bash/msf/metasploit_heartbleed_loop.sh
 Cet exploit metasploit est détectée par l'IDPS.
 
 
+
+## Pour rétrograder OpenSSL
+
+J'ai installé les dépôts de Wheezy et tenté de configuré de cette manière cependant j'ai été confronté à des problèmes car les dépôts sont obsolètes, parfois les paquets dépendent de libssl qui doit lui aussi être rétrogradé.
+
+
+J'ai appris à vérifier les versions disponibles par apt, à reconfigurer les listes de sources d'apt.
+https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/markdown/debian_wheezy/recap.md
+
+Cependant je n'ai pas eu le temps de tester en installant Wheezy car cela prenait trop de temps et que Wheezy sera bientôt obsolète.
+
+
+J'ai appris aussi à utiliser  : openssl  comme en tant que serveur web
+- Pour démarrer le serveur  :
+openssl s_server -key /etc/apache2/ssl/apache.key -cert /etc/apache2/ssl/apache.crt -accept 443 -www
+
+- Voici la commande pour le démarrer en mode client :
+
+openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server extension"
+
+## on installe splunk
+
+
+
+On installe les applications  : 
+
+
+DNS Insight https://splunkbase.splunk.com/app/1827/
+## on installe splunk UF
+
+
+Il faut configurer le hostname et le fichier /etc/hosts
+On le lie au serveur Splunk et on liste les serveurs de collectes.
+
+
+sudo /opt/splunkforwarder/bin/splunk list forward-server
+
+On peut vérifier les fichiers surveillées dans /opt/splunkforwarder/etc/apps/search/local/inputs.conf
+
+On isnatlle l'application TA-tcpdump https://splunkbase.splunk.com/app/4818/#/details
+
+
+
+Voici les détails de mon installation de Splunk
+
+https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/markdown/splunk2.md
+
+
+## tcpdump
+
+On peut l'utiliser pour capturer les en-têtes et les requêtes HTTP avec la méthode GET
+
+
+tcpdump -i enp0s8 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'  
+
+
+Néanmoins tcpdump est utilisée avec la commande
+
+/usr/sbin/tcpdump -pnns0 -i any -tttt portrange 23-450 and not host 127.0.0.1
+
+
+Un logrotate est liée au service tcpdump qui démarre au démarrage.
+
+Ainsi il est possible d'utiliser Splunk pour collecter ces logs.
+
+
+
+Splunk dispose lui aussi d'un log : l'option binary-files permet d'afficher son contenu avec grep
+
+
+cat /opt/splunkforwarder/var/log/splunk/splunkd.log | grep --binary-files=text 21:03
+
+TCA-dump permet par conséquent la collecte des logs de tcpdump.
+DNS INSIGHT va permettre de visualiser sur l'interface web de Splunk les requêtes DNS
+
+## paramétrer les logs de snort pour splunk
+
+Voici comment paramétrer leschamps des logs de snort pour splunk
+
+https://searchitchannel.techtarget.com/feature/Snortconf-output-options
+
+
+
+On pourrrait le parser en CSV
+
+output alert_csv: alert.csv default
+
+https://security.stackexchange.com/questions/29603/what-type-of-data-does-snort-log
+
+
+
+néanmoins avec u2spewfoo on est capable de lire les logs de snort :
+https://stackoverflow.com/questions/27221783/snort-log-file-output-format
+
+
+
+
+- splunk dashboard
+
+- snort
+Tentative connexion ICMP
+ICMP Echo Reply
+ICMP PING
+ICMP PING Windows
+
+
+# annexes
+
+###### log de Snort vers syslog pour Splunk
+
+https://serverfault.com/questions/636770/snort-not-sending-alert-log-file-to-syslog-server
+
+https://stackoverflow.com/questions/26246678/read-the-alert-log-from-snort
+
+
+
 # autres
+## oublier annexes
+
+
+## snort conf log output for splunk
+
+There are by default 28 fields available for log analysis that include timestamp, sig_generator, sig_id, sig_rev, msg, proto etc. For understanding Snort Log Management i recommend to read "Managing Snort Alerts"
+
+https://security.stackexchange.com/questions/29603/what-type-of-data-does-snort-log
+
+###### snortconf output
+- first sol
+  output alert_fast: alert.fast output alert_full: alert.full output alert_syslog: LOG AUTH LOG_ALERT 
+
+-  second sol :
+output alert_csv: alert.csv default
+
+cat /var/log/snort/alert.csv 
+
+https://searchitchannel.techtarget.com/feature/Snortconf-output-options
 ### autres
 
 OpenSSL 1.0.1c 10 May 2012

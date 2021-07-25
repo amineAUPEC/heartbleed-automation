@@ -37,10 +37,23 @@ https://community.splunk.com/t5/Archive/Licence-violation-don-t-understand-why/m
 
 
 
+## tcpdump syntax
+
+https://danielmiessler.com/study/tcpdump/
+## splunk snort
+
+https://neversecure.ca/2019/05/11/configuring-splunk-and-snort-on-your-home-network/
 
 
 
+#### splunk snort log parse
+https://stackoverflow.com/questions/26246678/read-the-alert-log-from-snort
 
+
+
+## splunk monitor files
+
+https://docs.splunk.com/Documentation/Splunk/latest/Data/Monitorfilesanddirectories
 ## splunk install forwarder :
 https://www.laurentmarot.fr/wordpress/?p=4026
 ## heartbeat explications
@@ -55,7 +68,9 @@ https://asecuritysite.com/encryption/heart2
 
 
 
-
+## heartbleed attaque : NSA
+https://www.shortform.com/blog/heartbeat-snowden-program/
+https://www.wired.com/2014/04/nsa-heartbleed/
 
 ### variante ticketbleed
 https://filippo.io/ticketbleed/

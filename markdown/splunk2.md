@@ -1,3 +1,4 @@
+## install splunk-forwarder
 go to https://www.splunk.com/en_us/download/universal-forwarder.html  
 sudo apt-get update -y  
 sudo apt-get install -y wget  
@@ -88,19 +89,22 @@ index=
 
 
 
-link
+- link
 
 
 https://www.laurentmarot.fr/wordpress/?p=4026
 
 https://meritis.fr/comment-fonctionne-splunk/
 
+
+
+- splunk link
   http://192.168.1.24:8000/en-US/app/search/search?q=search%20index%3D%22*%22%20index%3Dgeneral&display.page.search.mode=smart&dispatch.sample_ratio=1&workload_pool=&earliest=0&latest=&sid=1623846611.16
   
   
   
   
-  =====================
+=====================
   
   
   
@@ -564,7 +568,7 @@ sudo crontab -l
 ##### to do  
 sudo crontab -e  
 
-pas eu la peine
+lancer toutes les 12 minutes
 
 ### *Extraction fields or regex* 
 
