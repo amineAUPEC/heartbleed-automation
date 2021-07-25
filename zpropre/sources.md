@@ -36,8 +36,38 @@ index=_internal per_index_thruput earliest=-60d@d latest=now | timechart span=1d
 https://community.splunk.com/t5/Archive/Licence-violation-don-t-understand-why/m-p/439275
 
 
+
+
+
+
+
+## splunk install forwarder :
+https://www.laurentmarot.fr/wordpress/?p=4026
+## heartbeat explications
+https://blog.xmco.fr/20140411heartbleed-la-faille-qui-touche-au-coeur-la-suite-openssl/
+
+https://www.synetis.com/la-faille-heartbleed/
+
+
+
 ## heartbleed attaque
 https://asecuritysite.com/encryption/heart2
+
+
+
+
+
+### variante ticketbleed
+https://filippo.io/ticketbleed/
+
+
+### fork openssl -- libressl par Google
+https://fr.wikipedia.org/wiki/LibreSSL
+
+## heartbleed attaque par un chercheur en sécurité : jas9reet
+https://www.youtube.com/watch?v=qYSAgtG81Ic
+https://github.com/jas9reet/heartbleed-lab
+https://raw.githubusercontent.com/roflcer/heartbleed-vuln/master/attack.py
 https://www.exploit-db.com/docs/49313
 
 ## sql injection
@@ -71,3 +101,6 @@ https://www.youtube.com/watch?v=gp_k0UVOYMw
 https://pdfcrowd.com/#convert_by_input
 https://stackoverflow.com/questions/30573696/how-to-convert-local-html-to-pdf
 https://github.com/search?q=html+generate+pdf+locally&type=Repositories
+
+
+
