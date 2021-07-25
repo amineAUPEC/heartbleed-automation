@@ -120,4 +120,55 @@ ICMP analyse = par heure
 le reste = toutes les 15 dernières minutes
 
 
-earliest=-2m 2 min de décalgae de tcpdump
+earliest=-2m 2 min de décalage de tcpdump
+
+## rétrograder vers debian wheezy 7
+
+
+
+
+
+snort local rules
+
+
+snort local rules
+
+
+
+## 3 paquets splunk
+
+## usage de openssl srever en tant que serveur web
+
+et usage de openssl cie
+
+openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server extension"
+
+
+
+
+## configuration de splunk 
+
+
+cat /home/etudiant/splunk/etc/apps/search/local/inputs.conf
+
+### ou ajour de serveur avec add monitor
+sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -index snort_alert -sourcetype snort_alert_full
+
+### configuration de l'interface des vues, des recherches, filtres des champs par regex/délimiteurs
+
+
+### possibilité d'analyser les pcaps avec splunk
+## configuration du'n service pour tecpdump 
+
+### et relancer de force avec crontab
+
+
+
+
+## version tls
+
+
+## usage de github workflows pour une intégration CI/CD
+
+
+## docker heartbleed lab et exploitdb

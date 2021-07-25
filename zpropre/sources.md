@@ -28,3 +28,10 @@ http://splunk:8000/fr-FR/app/DNS_Insight/top_queries?earliest=-2m&latest=now&for
 
 
 http://splunk:8000/fr-FR/app/search/job_manager?jobStatus=RUNNING&owner=admin&countPerPage=50
+
+
+
+index=_internal per_index_thruput earliest=-60d@d latest=now | timechart span=1d eval(sum(kb)/1024) as "Daily Indexing Volume in MB"
+
+
+https://community.splunk.com/t5/Archive/Licence-violation-don-t-understand-why/m-p/439275

