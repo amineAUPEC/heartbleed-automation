@@ -1,5 +1,4 @@
-
-- isntall from netinstall
+- install from netinstall
 
     - install without mirror
 
