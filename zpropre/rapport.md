@@ -153,6 +153,12 @@ The SafeGuard feature of the Codenomicon's Defensics security testtools automati
 
 Who coordinates response to this vulnerability?
 Immediately after our discovery of the bug on 3rd of April 2014, NCSC-FI took up the task of verifying it, analyzing it further and reaching out to the authors of OpenSSL, software, operating system and appliance vendors, which were potentially affected. However, this vulnerability had been found and details released independently by others before this work was completed. Vendors should be notifying their users and service providers. Internet service providers should be notifying their end users where and when potential action is required.
+
+
+The HeartBeat protocol extension is added to TLS for this reason. The HTTP keep-alive feature does the same but HB 
+protocol allows a client to perform this action at a much higher rate. I
+
+Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package. In a way, it is a bit like a virtual machine. But unlike a virtual machine, rather than creating a whole virtual operating system, Docker allows applications to use the same Linux kernel as the system that they're running on and only requires applications be shipped with things not already running on the host computer
 ## Scénario théorique du protocole Heartbeat
 
 
@@ -330,7 +336,7 @@ openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server ex
 ## une autre vulnérabilité d'OPENSSL
 Une vulnérabilité a été trouvé dans OpenSSL et classée très critique. Snort Message: WEB-MISC SSLv2 openssl get shared cipher
 ## on installe splunk
-
+01/04/2021 carnet de bord
 
 
 On installe les applications  : 
