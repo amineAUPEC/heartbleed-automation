@@ -127,3 +127,5 @@ https://github.com/search?q=html+generate+pdf+locally&type=Repositories
 
 
 
+## version tls -----
+https://www.fatalerrors.org/index.php/a/secure-tls1.2-connection-process.html

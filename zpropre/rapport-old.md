@@ -1,4 +1,3 @@
-# before
 ###### snorthelp
 -c <rules> Use Rules File <rules
 -f         Turn off calls after binary log writes
@@ -19,7 +18,7 @@
 
 
 
-###### splunk parsing
+###### splunk parsing ---
 
 https://www.bing.com/search?q=sourcetype+csv+splunk&cvid=dad2d7aa4d1a4a3695410670afe6e2ac&aqs=edge..69i57.4118j0j1&pglt=643&FORM=ANNAB1&DAF0=1&PC=U531
 https://docs.splunk.com/Documentation/Splunk/8.2.1/Data/Extractfieldsfromfileswithstructureddata#:~:text=Splunk%20Web%20loads%20the%20%22Set%20Source%20type%22%20page.,are%20formatted%20based%20on%20the%20current%20source%20type.
@@ -57,6 +56,8 @@ le reste = toutes les 15 dernières minutes
 
 earliest=-2m 2 min de décalage de tcpdump
 
+
+## GNS3 virtualisation
 ## snort local rules
 
 
@@ -90,13 +91,16 @@ sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -ind
 
 ### possibilité d'analyser les pcaps avec splunk
 
-### et relancer de force avec crontab
+### et relancer de force avec crontab 
 
 
 
 
-## version tls
+## version tls -----
 https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/cheatsheet/tls_version.md
+
+
+0x03
 
 ## usage de github workflows pour une intégration CI/CD !!
 
@@ -132,7 +136,7 @@ Cet vulnérabilité Heartbleed est aussi connu sous la référénce CVE : CVE-20
 En effet la référence CVE (Common Vulnerabilities and Exposure est un standard afin de nommer les failles de sécurité par l'organisme MITRE.
 
 
-## to review ?????
+## to review
 TLS/DTLS (transport layer security protocols) heartbeat extension (RFC6520). 
 s to the leak of memory contents from the server to the client and from the client to the server.
 
@@ -236,20 +240,6 @@ Grâce à ce serveur Splunk, nous sommes en mesure de surveiller le trafic en un
 Ensuite, nous lançons la collecte des données sur l'Universal Forwarder, cela permet de collecter les logs et de transmettre vers le serveur Splunk depuis l'hôte **firewall**. Splunk collecte les résultats de l'analyseur réseau tcpdump.
 
 
-## Détails des commandes pour la mise en place du scénario général de détection et de protection
-Snort a été lancé, avec cette commande :
-sudo /usr/sbin/snort -A fast -i enp0s3 -u snort -c /etc/snort/snort.conf 
-
-
-Le serveur Splunk a été lancé avec :
-sudo /home/etudiant/splunk/bin/splunk start 
-
-L'Universal Forwarder de Splunk pour collecter les logs a été lancé sur firewall avec :
-sudo /opt/splunkforwarder/bin/splunk restart 
-
-
-
-
 
 ##  Scénario général pour exploiter la vulnérabilité Heartbleed
 
@@ -285,7 +275,7 @@ On installe les paquets utiles à git et on clone https://github.com/amineAUPEC/
 On se déplace sur le répertoire : pour lancer docker-compose
 cd /home/etudiant/heartbleed-automation/bash/heartbleed-example/
 sudo docker-compose up -d
-## Les étapes sur la VM injection de données sont :  
+## Les étapes sur la VM injection de donnée sont :  
 Dans le répertoire /home/etudiant/heartbleed-example
 On lance stimulate_server :
 python stimulate_server.py -a 192.168.1.49
@@ -324,7 +314,7 @@ Cet exploit metasploit est détectée par l'IDPS.
 
 
 
-## Pour rétrograder OpenSSL -----
+## Pour rétrograder OpenSSL
 
 
 J'ai aussi essayer d'autre méthode afin de faire confiance à une source obsolète avec apt-key add 
@@ -348,33 +338,17 @@ openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server ex
 
 
 
-## une autre vulnérabilité d'OPENSSL ----
+## une autre vulnérabilité d'OPENSSL
 Une vulnérabilité a été trouvé dans OpenSSL et classée très critique. Snort Message: WEB-MISC SSLv2 openssl get shared cipher
 ## on installe splunk
-Nous augmenté de la taille de la partition de la VM Debian, ce qui permet d'avoir un plus grand disque dur.
 01/04/2021 carnet de bord
 
-Ce serveur Splunk est à la fois Search-Head, serveur web Splunk et indexeur.
 
+On installe les applications  : 
 
-Les « Splunk Search Heads » : Le Search Head joue le rôle d’interface entre l’utilisateur et les données de l'indexeur.
-
-Les « Splunk Indexers » : Ils utilisent le service Daemon Splunk. Ils reçoivent les données, les indexent selon une syntaxe spécifique ensuite ils les préparent pour le stockage.
-
-
-Pour notre maquette, on installe les applications  : 
 
 DNS Insight https://splunkbase.splunk.com/app/1827/
-
-
-Splunk For Snort :https://splunkbase.splunk.com/app/340/
-
-
-
-
 ## on installe splunk UF
-
-Le Universal Forwarder sur Splunk permet de récolter les données et de les rediriger auprès d'un indexeur.
 
 
 Il faut configurer le hostname et le fichier /etc/hosts
@@ -392,25 +366,6 @@ On installe l'application TA-tcpdump https://splunkbase.splunk.com/app/4818/#/de
 Voici les détails de mon installation de Splunk
 
 https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/markdown/splunk2.md
-
-
-
-
-
-## configuration de splunk 
-On configure Splunk de manière générale 
-Depuis l'UF :
-
-
-cat /opt/splunkforwarder/splunk/etc/apps/search/local/inputs.conf
-
-### ou ajout de serveur avec add monitor
-sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -index snort_alert -sourcetype snort_alert_full
-
-
-
-Depuis le Search-Head
-### configuration de l'interface des vues, des recherches, filtres des champs par regex/délimiteurs
 
 
 ## tcpdump
@@ -437,27 +392,18 @@ Splunk dispose lui aussi d'un log : l'option binary-files permet d'afficher son 
 
 cat /opt/splunkforwarder/var/log/splunk/splunkd.log | grep --binary-files=text 21:03
 
-Nous utilisons aussi une tâche planifiée Cron pour relancer de force le service tcpdump, par exemple en cas d'erreur.
-
-
 TCA-dump permet par conséquent la collecte des logs de tcpdump.
 DNS INSIGHT va permettre de visualiser sur l'interface web de Splunk les requêtes DNS
 
-Une autre possibilité est d'analyser les fichier pcaps qui sont lisibles par les sniffeurs réseaux comme Wireshark/tcpdump avec Splunk
-
-### possibilité d'analyser les pcaps avec splunk
-
-
-
 ## paramétrer les logs de snort pour splunk
 
-Voici comment paramétrer les champs des logs de snort pour splunk
+Voici comment paramétrer leschamps des logs de snort pour splunk
 
 https://searchitchannel.techtarget.com/feature/Snortconf-output-options
 
 
 
-On pourrait le parser en CSV
+On pourrrait le parser en CSV
 
 output alert_csv: alert.csv default
 
@@ -469,7 +415,7 @@ néanmoins avec u2spewfoo on est capable de lire les logs de snort :
 https://stackoverflow.com/questions/27221783/snort-log-file-output-format
 
 
-## Notre Dashboard Splunk
+
 
 - splunk dashboard
 
@@ -478,203 +424,6 @@ Tentative connexion ICMP
 ICMP Echo Reply
 ICMP PING
 ICMP PING Windows
-
-Snort permet une vision avec le top 10 des signatures, des classifications, des adresses ip de destination, des adresses ports de destination et des adresses ports source
-
-Les paquets ICMP sont analysées par heure tandis que les autres paquets sont mis à jour toutes les 15 minutes.
-
-Nous utilisons les options pour filtrer comme earliest, stats, and, or. 
-earliest=-2m 2 min de décalage de tcpdump
-
-
-On affiche aussi le TOP des requêtes DNS ou avec DNS insight
-
-
-
-
-
-- top 10 des signatures :
-- top 10 des classifications :
-- top 10 des adresses ip de destination :
-- top 10 des adresses ports de destination :
-- top 10 des adresses ports source :
-
-Les autres requêtes Splunk sont :
-Pour visualiser tous les paquets de tcpdump
-* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log"
-Pour visualiser tous les paquets DNS de tcpdump  
-* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" *.53
-
-
-Si on filtre les paquets sur le PORT 80 : HTTP
-* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" *.80
-Pour filtrer sur le port du protocole HTTPS
-* host=firewall sourcetype="port53tttt" source="/var/log/tcpdump.log" *.443
-
-<!-- Pour formater les requêtes DNS
-* sourcetype=tshark:port53 OR sourcetype=port53tttt src=* dest=*| fields dns_len query length reply_code Len message_type record_type transport | search message_type=QUERY | table * -->
-## Les règles locales de Snort :le fichier local.rules
-
-Voici toutes nos règles Snort que l'on a appliqué :
-
-
-https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/zpropre/snort-rules/local.rules
-
-
-On remarque les règles liées à la vulnérabilité Heartbleed
-
-
-
-### Les règles Snort pour Heartbleed :
-
-#HEART-BLEED-ALERTS : time of detection reduced
-
-
-alert tcp any any -> any any (msg:"FOX-SRT - Flowbit - TLS-SSL Client Hello"; flow:established; dsize:< 500; content:"|16 03|"; depth:2; byte_test:1, <=, 2, 3; byte_test:1, !=, 2, 1; content:"|01|"; offset:5; depth:1; content:"|03|"; offset:9; byte_test:1, <=, 3, 10; byte_test:1, !=, 2, 9; content:"|00 0f 00|"; flowbits:set,foxsslsession; flowbits:noalert; threshold:type limit, track by_src, count 1, seconds 60; reference:cve,2014-0160; classtype:bad-unknown; sid: 21001130; rev:9;)
-
-
-
-alert tcp any any -> any any (msg:"FOX-SRT - Suspicious - TLS-SSL Large Heartbeat Response"; flow:established; flowbits:isset,foxsslsession; content:"|18 03|"; depth: 2; byte_test:1, <=, 3, 2; byte_test:1, !=, 2, 1; byte_test:2, >, 200, 3; threshold:type limit, track by_src, count 1, seconds 600; reference:cve,2014-0160; classtype:bad-unknown; sid: 21001131; rev:5;)
-
-
-### Détails des règles Snort pour Heartbleed :
-
-
-
-On remarque que alert permet de notifier dans la console ou dans le fichier de log générés par Snort.
-
-
-Le protocole TCP de la couche transport du modèle TCP/IP sert de référence à cette règle.
-
-On capture quelque soit l'adresse réseau source ainsi que de destination.
-
-Le message affichée contient Large Heartbeat Response dans le cas d'une attaque lors de la première phase d'échange, l'alerte contient TLS-SSL Client Hello.
-
-
-
-Ces messages ne s'affichent que si la connexion est établit, que le paquet contient certains paramètres comme |18 03| pour désigner le paquet heartbeat
-
-Les octets sont comparées. Un seuil permet de limiter par les paquets qui sont issues de la même source, affichée une seule fois toutes les 10 minutes.
-
-Les indications sur la référence CVE 2014-0160 sont présentes dans les règles et enfin le SID est un identifiant qui signe la règle : Il est unique.
-
-
-
-## Pour résumer : Les règles Snort
-
-Gdrive 20/05/2021
-
-Les possibilités offertes par Snort sont : Des règles :
-Les règles de snort sont décrites dans un langage simple et suivent le schéma suivant :
-l'en-tête de règle qui contient
-l'action de la règle.
-le protocole qui est utilisé pour la transmission des données : TCP, UDP ou ICMP.
-les adresses IP source et destination et leur masque.
-les ports source et destination à vérifier sur les paquets.
-les options de la règle qui contiennent :
-le message d'alerte.
-les conditions qui déterminent l'envoi de l'alerte en fonction du paquet analysé.
-
-
-
-
-
-
-
-
-Voici les options lorsque nous lançons la commande de Snort :
-###### snorthelp
--c <rules> Utiliser un fichier de configuration de règles 
--i <if>    Spécifier les interfaces d'écoute 
--l <ld>    Répertoire de destination des logs 
-
--A         Usage des alertes en mode rapide/fast, complet/full, console, test ou rien/none  
--s         Redirection des messages d'alertes dans syslog
-
--L <file>  Spécifie le fichier de log  
-
--u <uname> Utiliser snort avec un uid ou en tant <uname> une fois démarrée
-        -U         Utilise l'heure Universelle UTC en tant que référence
-        -v         Pur déboguer, avec des messages plus verbeux/détailler
-
-
-<!-- -f         Turn off calls after binary log writes -->
-
-
-
-
-
-Nous avions commencé à créer une interface de gestion web qui génère les règles iptables et permet de les visualiser rapidement et simplement.
-
-
-
-
-
-
-
-## Analyse du trafic réseau : Des paquets avec Wireshark
-images [wireshark]
-C:\Users\Administrateur\Desktop\ptutmerge
-
-Message client Hello
-Requête Heartbeat
-
-Message Heartbeat
-
-Version du protocole TLS 
-
-
-Réponse Heartbeat
-
-## version tls -----
-https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/cheatsheet/tls_version.md
-https://www.fatalerrors.org/index.php/a/secure-tls1.2-connection-process.html
-
-La version TLS a pour code : 
-Si c'est en TLS 1.0: 0x0301 
-ou sinon si TLS 1.2: 0x0303
-
-
-
-En analysant la configuration le protocole SSL est de type 22
-
-
-Si c'est un échange clé du serveur, le type est définit avec la valeur 12.
-Sinon si le serveur répond que c'est fait, le code du type est 14.
-
-Le serveur génère des données aléatoire et des identifiants pour la session.
-
-
-
-
-
-Le paquet SSL précise bien la version TLS, la longueur, le type.
-
-
-
-
-
-## gestionnaire web de firewall
-Toutefois nous l'avons abandonné car Snort gère la gestion du firewall afin de bloquer les paquets mais aussi par manque de temps, nous avons prioriser nos tâches en entreprise.
-
-
-
-
-
-
-
-
-
-
-## usage de github workflows pour une intégration CI/CD !!
-Nous avons 
-
-## GNS3 virtualisation
-Nous avons simulé sur GNS3 la maquette avant de réaliser les attaques.
-
-
-
-
 
 
 # annexes
