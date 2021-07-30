@@ -104,34 +104,6 @@ https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f
 ## gestionnaire web de firewall
 abandonné car snort le gère et manque de temps
 
-
-# rapport
-
-
-
-
-
-## Introduction faille Heartbleed du module Heartbeat
-
-La faille Heartbleed, permet à des attaquants de récupérer le contenu de la RAM du serveur mais une autre variante permet de récupérer du côté du client.
-
-Nous allons nous intéresser à la récupération du contenu de la RAM du serveur Openssl 1.0.1c, en effet avant la version 1.0.h les versions vulnérables à partir de la 1.0.1a.
-
-Edward Snowden a fait la révélation sur cette faille que la NSA utilisée sur les sites HTTPS.
-En avril 2014, le bug a été découvert, par l'équipe sécurité de Google et de l'entreprise finlandaise Codenomicon qui a reporté à leur autorité NCSC-FI.
-
-
-La vulnérabilité aurait été publiée par erreur à la suite d'une proposition de correction de bugs et d'améliorations de fonctionnalités, par un développeur bénévole. Le développeur implémenter l'extension Heartbeat avec le protocole TLS/DTLS selon le RFC 6520. 
-Le 31 décembre 2011, le code vulnérable a été ajouté dans la version 1.0.1 d'OpenSSL, le 14 mars 2012. Mais la qualité du code d'une fonction, pose problème en effet.
-
-
-Cette problématique de faille de sécurité dans l'Open-Source pousse les GAFAM et grandes entreprises à investir dans un financement commun CII (Core Infrastructure Initiative).
-
-
-Cet vulnérabilité Heartbleed est aussi connu sous la référénce CVE : CVE-2014-0160 moins connu sous le nom de CVE-2014-0346.
-En effet la référence CVE (Common Vulnerabilities and Exposure est un standard afin de nommer les failles de sécurité par l'organisme MITRE.
-
-
 ## to review ?????
 <!-- TLS/DTLS (transport layer security protocols) heartbeat extension (RFC6520). -- -->
 <!-- s to the leak of memory contents from the server to the client and from the client to the server. -->
@@ -159,7 +131,31 @@ Who coordinates response to this vulnerability?
 <!-- The HeartBeat protocol extension is added to TLS for this reason. The HTTP keep-alive feature does the same but HB protocol allows a client to perform this action at a much higher rate. -- -->
 
 <!-- Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package. In a way, it is a bit like a virtual machine. But unlike a virtual machine, rather than creating a whole virtual operating system, Docker allows applications to use the same Linux kernel as the system that they're running on and only requires applications be shipped with things not already running on the host computer -- -->
-## Scénario théorique du protocole Heartbeat
+# rapport
+
+
+## *CHAP3A* ## Introduction faille Heartbleed du module Heartbeat
+
+La faille Heartbleed, permet à des attaquants de récupérer le contenu de la RAM du serveur mais une autre variante permet de récupérer du côté du client.
+
+Nous allons nous intéresser à la récupération du contenu de la RAM du serveur Openssl 1.0.1c, en effet avant la version 1.0.h les versions vulnérables à partir de la 1.0.1a.
+
+Edward Snowden a fait la révélation sur cette faille que la NSA utilisée sur les sites HTTPS.
+En avril 2014, le bug a été découvert, par l'équipe sécurité de Google et de l'entreprise finlandaise Codenomicon qui a reporté à leur autorité NCSC-FI.
+
+
+La vulnérabilité aurait été publiée par erreur à la suite d'une proposition de correction de bugs et d'améliorations de fonctionnalités, par un développeur bénévole. Le développeur implémenter l'extension Heartbeat avec le protocole TLS/DTLS selon le RFC 6520. 
+Le 31 décembre 2011, le code vulnérable a été ajouté dans la version 1.0.1 d'OpenSSL, le 14 mars 2012. Mais la qualité du code d'une fonction, pose problème en effet.
+
+
+Cette problématique de faille de sécurité dans l'Open-Source pousse les GAFAM et grandes entreprises à investir dans un financement commun CII (Core Infrastructure Initiative).
+
+
+Cet vulnérabilité Heartbleed est aussi connu sous la référénce CVE : CVE-2014-0160 moins connu sous le nom de CVE-2014-0346.
+En effet la référence CVE (Common Vulnerabilities and Exposure est un standard afin de nommer les failles de sécurité par l'organisme MITRE.
+
+
+## *CHAP3A* ## Scénario théorique du protocole Heartbeat
 
 L'extension Heartbeat est l'équivalent de la fonctionnalité HTTP keep-alive cependant Heartbeat est compatible avec le protocole TLS pour les sites HTTPS et envoie à une cadence beaucoup plus élevé.
 L'usage habituelle de ce protocole Heartbeat permet : A un client de vérifier que le serveur répond de manière régulière, il y a deux paramètres, le premier le nombre de caractères, et le second une chaînes de caractères par exemple un mot.
@@ -191,7 +187,7 @@ L'attaquant envoie deux messages, il établit la connexion SSL : avec un paquet 
 Si l'exploit est un succès, on affiche le résultat du contenu de la mémoire du serveur est présenté à la manière d’un dump « hexdump ».
 
 
-## Les possibilités de cet exploit sont :
+## *CHAP3A* ## Les possibilités de cet exploit sont :
 De plus, il est possible de récupérer des informations sensibles comme les clefs privées associées aux certificats SSL utilisés pour chiffrer le trafic, des identifiants de connexion appartenant aux visiteurs d’un site, ou encore les en-têtes HTTP  qui contiennent les cookies de sessions ou l’authentification Basic permettant d’usurper l’identité d’un internaute.
 
 De plus l'équipe d'OpenSSL a été en mesure de récupérer des certificats X.509 qui est une norme assez courante pour les certificats CSR des sites HTTPS.
@@ -201,7 +197,7 @@ De plus, même le gestionnaire de mot de passe Lastpass a été impacté par cet
 
 
 
-## La portée de l'exploit Heartbeat/Heartbleed
+## *CHAP3A* ## La portée de l'exploit Heartbeat/Heartbleed
 
 <!-- Le protocole TLS comprend une fonctionnalité nommée Heartbeat. Il s’agit d’un mécanisme de type « écho », qui permet à l’une des extrémités d’une communication TLS – client ou serveur – d’envoyer à l’autre un message, que l’interlocuteur doit répéter en retour. Cette fonctionnalité permet de vérifier que la connexion chiffrée est toujours active. -->
 
@@ -210,7 +206,7 @@ En outre, les VPN, les messageries instantanées ont été impactées, sauf que 
 Les premières estimations sont environ 600000 serveurs vulnérables avec OpenSSL. La majorité des serveurs ont été mis à jour, les serveurs restants ont leurs certificats révoqués.
 
 
-## Les bonnes pratiques pour éviter ce genre d'attaque sont : 
+## *CHAP3A* ## Les bonnes pratiques pour éviter ce genre d'attaque sont : 
 
 
 - De désactiver Heartbeat, si une mise à jour n'est pas possible en désactivant avec l'option ou en recompilant le programme.
@@ -222,7 +218,7 @@ Les premières estimations sont environ 600000 serveurs vulnérables avec OpenSS
 
 
 
-## Mise en place du scénario général de détection et de protection
+## *CHAP4B* ## Mise en place du scénario général de détection et de protection
 Tout d'abord un IDPS peut détecter la faille Heartbleed, en comparant la taille du paquet et le nombre de requêtes, mais il est limité car le paquet est chiffrée. 
 De plus l'IDPS, va comparer la taille du paquet lors de la requête et lors de la réponse pour s'assurer que la demande n'est pas malicieuse.
 <!-- Néanmoins l'IDPS sera pas capable de rejeter les paquets, sauf s'ils bloquent tous les paquets Heartbleed.** -->
@@ -247,7 +243,7 @@ Ensuite, nous lançons la collecte des données sur l'Universal Forwarder, cela 
 
 
 
-## Détails des commandes pour la mise en place du scénario général de détection et de protection
+## *CHAP4B* ## Détails des commandes pour la mise en place du scénario général de détection et de protection
 Snort a été lancé, avec cette commande :
 sudo /usr/sbin/snort -A fast -i enp0s3 -u snort -c /etc/snort/snort.conf 
 
@@ -262,7 +258,7 @@ sudo /opt/splunkforwarder/bin/splunk restart
 
 
 
-##  Scénario général pour exploiter la vulnérabilité Heartbleed
+## *CHAP4A* ##  Scénario général pour exploiter la vulnérabilité Heartbleed
 
 On lance le serveur vulnérable avec OpenSSL dans notre cas suite à des problèmes pour rétrograder, nous avons décidé de passer par un conteneur Docker. Qui intègre aussi un serveur web Apache.
 
@@ -283,7 +279,7 @@ Nous avons utilisé un conteneur Docker car Docker permet d'automatiser, de cré
 
 
 
-## Les prérequis pour les différents serveurs sont :
+## *CHAP4A* ## Les prérequis pour les différents serveurs sont :
 - Attaquant
         - git 
         - docker:
@@ -295,19 +291,19 @@ Nous avons utilisé un conteneur Docker car Docker permet d'automatiser, de cré
         - python:
             - python1-2
             - python3
-## Les étapes sur le serveur vulnérable sont :
+## *CHAP4A* ## Les étapes sur le serveur vulnérable sont :
 On installe les paquets utiles à git et on clone https://github.com/amineAUPEC/heartbleed-automation
 
 On se déplace sur le répertoire : pour lancer docker-compose
 cd /home/etudiant/heartbleed-automation/bash/heartbleed-example/
 sudo docker-compose up -d
-## Les étapes sur la VM injection de données sont :  
+## *CHAP4A* ## Les étapes sur la VM injection de données sont :  
 Dans le répertoire /home/etudiant/heartbleed-example
 On lance stimulate_server :
 python stimulate_server.py -a 192.168.1.49
 
 
-## Les étapes sur la VM pentest pour attaquer le serveur :
+## *CHAP4A* ## Les étapes sur la VM pentest pour attaquer le serveur :
 
 
 
@@ -340,7 +336,7 @@ Cet exploit metasploit est détectée par l'IDPS.
 
 
 
-## Pour rétrograder OpenSSL -----
+## *CHAP4A* ## Pour rétrograder OpenSSL -----
 
 
 J'ai aussi essayer d'autre méthode afin de faire confiance à une source obsolète avec apt-key add 
@@ -364,9 +360,9 @@ openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server ex
 
 
 
-## une autre vulnérabilité d'OPENSSL ----
+## *CHAP3A* ## une autre vulnérabilité d'OPENSSL ----
 Une vulnérabilité a été trouvé dans OpenSSL et classée très critique. Snort Message: WEB-MISC SSLv2 openssl get shared cipher
-## on installe splunk
+## *CHAP 2 SPLUNK* : ## on installe splunk
 Nous augmenté de la taille de la partition de la VM Debian, ce qui permet d'avoir un plus grand disque dur.
 01/04/2021 carnet de bord
 
@@ -388,7 +384,7 @@ Splunk For Snort :https://splunkbase.splunk.com/app/340/
 
 
 
-## on installe splunk UF
+## *CHAP 2 SPLUNK* : ## on installe splunk UF
 
 Le Universal Forwarder sur Splunk permet de récolter les données et de les rediriger auprès d'un indexeur.
 
@@ -413,7 +409,7 @@ https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f
 
 
 
-## configuration de splunk 
+## *CHAP 2 SPLUNK* : ## configuration de splunk 
 On configure Splunk de manière générale 
 Depuis l'UF :
 
@@ -429,7 +425,7 @@ Depuis le Search-Head
 ### configuration de l'interface des vues, des recherches, filtres des champs par regex/délimiteurs
 
 
-## tcpdump
+## *CHAP 2 SPLUNK//chap4B* : ## tcpdump
 
 On peut l'utiliser pour capturer les en-têtes et les requêtes HTTP avec la méthode GET
 
@@ -465,7 +461,7 @@ Une autre possibilité est d'analyser les fichier pcaps qui sont lisibles par le
 
 
 
-## paramétrer les logs de snort pour splunk
+## *CHAP 2 SPLUNK//chap4B* : ## paramétrer les logs de snort pour splunk
 
 Voici comment paramétrer les champs des logs de snort pour splunk
 
@@ -485,7 +481,7 @@ néanmoins avec u2spewfoo on est capable de lire les logs de snort :
 https://stackoverflow.com/questions/27221783/snort-log-file-output-format
 
 
-## Notre Dashboard Splunk
+## *CHAP 2 SPLUNK//chap4B*: ## Notre Dashboard Splunk
 
 - splunk dashboard
 
@@ -529,7 +525,7 @@ Pour filtrer sur le port du protocole HTTPS
 
 <!-- Pour formater les requêtes DNS
 * sourcetype=tshark:port53 OR sourcetype=port53tttt src=* dest=*| fields dns_len query length reply_code Len message_type record_type transport | search message_type=QUERY | table * -->
-## Les règles locales de Snort :le fichier local.rules
+## *SNORT* ## Les règles locales de Snort :le fichier local.rules
 
 Voici toutes nos règles Snort que l'on a appliqué :
 
@@ -576,7 +572,7 @@ Les indications sur la référence CVE 2014-0160 sont présentes dans les règle
 
 
 
-## Pour résumer : Les règles Snort
+## *SNORT* ## Pour résumer : Les règles Snort
 
 Gdrive 20/05/2021
 
@@ -628,7 +624,7 @@ Nous avions commencé à créer une interface de gestion web qui génère les r�
 
 
 
-## Analyse du trafic réseau : Des paquets avec Wireshark
+## *CHAP3A||CHAP4A* ## Analyse du trafic réseau : Des paquets avec Wireshark
 images [wireshark]
 C:\Users\Administrateur\Desktop\ptutmerge
 
@@ -642,7 +638,7 @@ Version du protocole TLS
 
 Réponse Heartbeat
 
-## version tls -----
+## *CHAP3A||CHAP4A* ## version tls -----
 https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/cheatsheet/tls_version.md
 https://www.fatalerrors.org/index.php/a/secure-tls1.2-connection-process.html
 
