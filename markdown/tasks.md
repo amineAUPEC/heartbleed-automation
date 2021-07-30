@@ -39,7 +39,10 @@ screen heartbleed
 <!-- ### séparer par partie -->
 
 
+mise en place de snort
 
+
+On installe l'application TA-tcpdump  (explication installation)
 
 
 

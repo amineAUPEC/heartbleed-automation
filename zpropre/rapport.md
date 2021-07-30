@@ -362,7 +362,7 @@ openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server ex
 
 ## *CHAP3A* ## une autre vulnérabilité d'OPENSSL ----
 Une vulnérabilité a été trouvé dans OpenSSL et classée très critique. Snort Message: WEB-MISC SSLv2 openssl get shared cipher
-## *CHAP 2 SPLUNK* : ## on installe splunk
+## **CHAP 2 SPLUNK** : ## on installe splunk
 Nous augmenté de la taille de la partition de la VM Debian, ce qui permet d'avoir un plus grand disque dur.
 01/04/2021 carnet de bord
 
@@ -525,7 +525,7 @@ Pour filtrer sur le port du protocole HTTPS
 
 <!-- Pour formater les requêtes DNS
 * sourcetype=tshark:port53 OR sourcetype=port53tttt src=* dest=*| fields dns_len query length reply_code Len message_type record_type transport | search message_type=QUERY | table * -->
-## *SNORT* ## Les règles locales de Snort :le fichier local.rules
+## *SNORT* restant ## Les règles locales de Snort :le fichier local.rules
 
 Voici toutes nos règles Snort que l'on a appliqué :
 
@@ -533,11 +533,11 @@ Voici toutes nos règles Snort que l'on a appliqué :
 https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/zpropre/snort-rules/local.rules
 
 
-On remarque les règles liées à la vulnérabilité Heartbleed
 
 
 
 ### Les règles Snort pour Heartbleed :
+On remarque les règles liées à la vulnérabilité Heartbleed
 
 #HEART-BLEED-ALERTS : time of detection reduced
 
@@ -572,7 +572,7 @@ Les indications sur la référence CVE 2014-0160 sont présentes dans les règle
 
 
 
-## *SNORT* ## Pour résumer : Les règles Snort
+## **SNORT** ## Pour résumer : Les règles Snort
 
 Gdrive 20/05/2021
 
@@ -607,7 +607,7 @@ Voici les options lorsque nous lançons la commande de Snort :
 
 -u <uname> Utiliser snort avec un uid ou en tant <uname> une fois démarrée
         -U         Utilise l'heure Universelle UTC en tant que référence
-        -v         Pur déboguer, avec des messages plus verbeux/détailler
+        -v         Pour déboguer, avec des messages plus verbeux/détailler
 
 
 <!-- -f         Turn off calls after binary log writes -->
@@ -616,7 +616,6 @@ Voici les options lorsque nous lançons la commande de Snort :
 
 
 
-Nous avions commencé à créer une interface de gestion web qui génère les règles iptables et permet de les visualiser rapidement et simplement.
 
 
 
@@ -667,6 +666,8 @@ Le paquet SSL précise bien la version TLS, la longueur, le type.
 
 
 ## gestionnaire web de firewall
+Nous avions commencé à créer une interface de gestion web qui génère les règles iptables et permet de les visualiser rapidement et simplement.
+
 Toutefois nous l'avons abandonné car Snort gère la gestion du firewall afin de bloquer les paquets mais aussi par manque de temps, nous avons prioriser nos tâches en entreprise.
 
 
@@ -689,7 +690,7 @@ Nous avons simulé sur GNS3 la maquette avant de réaliser les attaques.
 
 RFC Request For Comments est un standard pour implémenter une fonctionnalité ou un protocole selon des documents décrivant les spécifications techniques.
 
-
+SIEM Security information and event management (SIEM) is a field within the field of computer security, where software products and services
 ### usage de mobaxterm-macros-export--save tabs on bookmarks
 
 

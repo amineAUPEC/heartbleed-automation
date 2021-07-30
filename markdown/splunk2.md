@@ -1,4 +1,4 @@
-## install splunk-forwarder
+##  install splunk-forwarder
 go to https://www.splunk.com/en_us/download/universal-forwarder.html  
 sudo apt-get update -y  
 sudo apt-get install -y wget  
