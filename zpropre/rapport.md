@@ -384,7 +384,7 @@ Splunk For Snort :https://splunkbase.splunk.com/app/340/
 
 
 
-## *CHAP 2 SPLUNK* : ## on installe splunk UF
+## **CHAP 2 SPLUNK** : ## on installe splunk UF
 
 Le Universal Forwarder sur Splunk permet de récolter les données et de les rediriger auprès d'un indexeur.
 
@@ -409,7 +409,7 @@ https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f
 
 
 
-## *CHAP 2 SPLUNK* : ## configuration de splunk 
+## **CHAP 2 SPLUNK** : ## configuration de splunk 
 On configure Splunk de manière générale 
 Depuis l'UF :
 
@@ -425,15 +425,10 @@ Depuis le Search-Head
 ### configuration de l'interface des vues, des recherches, filtres des champs par regex/délimiteurs
 
 
-## *CHAP 2 SPLUNK//chap4B* : ## tcpdump
-
-On peut l'utiliser pour capturer les en-têtes et les requêtes HTTP avec la méthode GET
+## **CHAP 2 SPLUNK//chap4B**: ## tcpdump
 
 
-tcpdump -i enp0s8 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'  
-
-
-Néanmoins tcpdump est utilisée avec la commande
+Tcpdump est installée sur l'UF, et après avoir configuré TA-TCPDUMP, le service tcpdump est utilisée avec la commande
 
 /usr/sbin/tcpdump -pnns0 -i any -tttt portrange 23-450 and not host 127.0.0.1
 
@@ -452,17 +447,48 @@ cat /opt/splunkforwarder/var/log/splunk/splunkd.log | grep --binary-files=text 2
 Nous utilisons aussi une tâche planifiée Cron pour relancer de force le service tcpdump, par exemple en cas d'erreur.
 
 
-TCA-dump permet par conséquent la collecte des logs de tcpdump.
+TA-TCPDUMP permet par conséquent la collecte des logs de tcpdump.
 DNS INSIGHT va permettre de visualiser sur l'interface web de Splunk les requêtes DNS
 
 Une autre possibilité est d'analyser les fichier pcaps qui sont lisibles par les sniffeurs réseaux comme Wireshark/tcpdump avec Splunk
+
+
+Tcpdump est puissant, on peut aussi l'utiliser pour capturer les en-têtes et les requêtes HTTP avec la méthode GET
+
+
+tcpdump -i enp0s8 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'  
 
 ### possibilité d'analyser les pcaps avec splunk
 
 
 
-## *CHAP 2 SPLUNK//chap4B* : ## paramétrer les logs de snort pour splunk
+## **CHAP 2 SPLUNK//chap4B** : ## paramétrer les logs de snort pour splunk
 
+sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/snort/snort.log.* -index snort_alert -sourcetype snort_alert_full 
+
+
+root@firewall:~# cat /opt/splunkforwarder/etc/apps/search/local/inputs.conf
+[monitor:///var/log/syslog]
+disabled = false
+index = general
+sourcetype = syslog
+
+[monitor:///var/log/snort]
+disabled = false
+index = snort_alert
+sourcetype = snort_alert_full
+
+[monitor:///opt/splunkforwarder/var/log/splunk/splunkd.log]
+disabled = false
+index = main
+sourcetype = splunkd
+
+
+
+
+
+
+Voici d'autres méthodes :
 Voici comment paramétrer les champs des logs de snort pour splunk
 
 https://searchitchannel.techtarget.com/feature/Snortconf-output-options
@@ -481,7 +507,7 @@ néanmoins avec u2spewfoo on est capable de lire les logs de snort :
 https://stackoverflow.com/questions/27221783/snort-log-file-output-format
 
 
-## *CHAP 2 SPLUNK//chap4B*: ## Notre Dashboard Splunk
+## **CHAP 2 SPLUNK//chap4B**: ## Notre Dashboard Splunk
 
 - splunk dashboard
 
@@ -491,7 +517,7 @@ ICMP Echo Reply
 ICMP PING
 ICMP PING Windows
 
-Snort permet une vision avec le top 10 des signatures, des classifications, des adresses ip de destination, des adresses ports de destination et des adresses ports source
+Snort permet une vision avec le top 10 des signatures, des classifications, des adresses ip de destination, des ports de destination et des ports source
 
 Les paquets ICMP sont analysées par heure tandis que les autres paquets sont mis à jour toutes les 15 minutes.
 

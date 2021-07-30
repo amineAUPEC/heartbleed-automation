@@ -27,7 +27,7 @@ guide clean
 
 ### screen
 
-screen interface splunk
+screen interface splunk dashboard
 
 
 
