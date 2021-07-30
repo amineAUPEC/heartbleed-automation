@@ -34,12 +34,11 @@ screen interface splunk
 screen heartbleed
 
 
-### traduire --correction grammaire
+<!-- ### traduire --correction grammaire -->
 
-### séparer par partie
+<!-- ### séparer par partie -->
 
 
-### usgae de mobaxterm-macros-export--save tabs on bookmarks
 
 
 

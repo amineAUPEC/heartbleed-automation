@@ -118,10 +118,10 @@ La faille Heartbleed, permet à des attaquants de récupérer le contenu de la R
 Nous allons nous intéresser à la récupération du contenu de la RAM du serveur Openssl 1.0.1c, en effet avant la version 1.0.h les versions vulnérables à partir de la 1.0.1a.
 
 Edward Snowden a fait la révélation sur cette faille que la NSA utilisée sur les sites HTTPS.
-En avril 2014, le bug a été découvert, par l'équipe sécurité de Google et de l'entreprise finlandaise Codenomicon.
+En avril 2014, le bug a été découvert, par l'équipe sécurité de Google et de l'entreprise finlandaise Codenomicon qui a reporté à leur autorité NCSC-FI.
 
 
-La vulnérabilité aurait été publiée par erreur à la suite d'une proposition de correction de bugs et d'améliorations de fonctionnalités, par un développeur bénévole. 
+La vulnérabilité aurait été publiée par erreur à la suite d'une proposition de correction de bugs et d'améliorations de fonctionnalités, par un développeur bénévole. Le développeur implémenter l'extension Heartbeat avec le protocole TLS/DTLS selon le RFC 6520. 
 Le 31 décembre 2011, le code vulnérable a été ajouté dans la version 1.0.1 d'OpenSSL, le 14 mars 2012. Mais la qualité du code d'une fonction, pose problème en effet.
 
 
@@ -133,36 +133,35 @@ En effet la référence CVE (Common Vulnerabilities and Exposure est un standard
 
 
 ## to review ?????
-TLS/DTLS (transport layer security protocols) heartbeat extension (RFC6520). 
-s to the leak of memory contents from the server to the client and from the client to the server.
+<!-- TLS/DTLS (transport layer security protocols) heartbeat extension (RFC6520). -- -->
+<!-- s to the leak of memory contents from the server to the client and from the client to the server. -->
 
 Can IDS/IPS detect or block this attack?
-Although the heartbeat can appear in different phases of the connection setup, intrusion detection and prevention systems (IDS/IPS) rules to detect heartbeat have been developed. 
+<!-- Although the heartbeat can appear in different phases of the connection setup, intrusion detection and prevention systems (IDS/IPS) rules to detect heartbeat have been developed.  -->
 
-Due to encryption differentiating between legitimate use and attack cannot be based on the content of the request, but the attack may be detected by comparing the size of the request against the size of the reply. 
+<!-- Due to encryption differentiating between legitimate use and attack cannot be based on the content of the request, but the attack may be detected by comparing the size of the request against the size of the reply. --- -->
 
 
-This implies that IDS/IPS can be programmed to detect the attack but not to block it unless heartbeat requests are blocked altogether.
+<!-- This implies that IDS/IPS can be programmed to detect the attack but not to block it unless heartbeat requests are blocked altogether. -->
 
 
 
 Who found the Heartbleed Bug?
-This bug was independently discovered by a team of security engineers (Riku, Antti and Matti) at Codenomicon and Neel Mehta of Google Security, who first reported it to the OpenSSL team. Codenomicon team found heartbleed bug while improving the SafeGuard feature in Codenomicon's Defensics security testing tools and reported this bug to the NCSC-FI for vulnerability coordination and reporting to OpenSSL team.
+<!-- This bug was independently discovered by a team of security engineers (*Riku, Antti and Matti*) at Codenomicon and *Neel Mehta* of Google Security, who first reported it to the OpenSSL team. Codenomicon team found heartbleed bug while improving the SafeGuard feature in Codenomicon's Defensics security testing tools and reported this bug to the NCSC-FI for vulnerability coordination and reporting to OpenSSL team. -- -->
 
-What is the Defensics SafeGuard?
-The SafeGuard feature of the Codenomicon's Defensics security testtools automatically tests the target system for weaknesses that compromise the integrity, privacy or safety. The SafeGuard is systematic solution to expose failed cryptographic certificate checks, privacy leaks or authentication bypass weaknesses that have exposed the Internet users to man in the middle attacks and eavesdropping. In addition to the Heartbleed bug the new Defensics TLS Safeguard feature can detect for instance the exploitable security flaw in widely used GnuTLS open source software implementing SSL/TLS functionality and the "goto fail;" bug in Apple's TLS/SSL implementation that was patched in February 2014.
+<!-- What is the Defensics SafeGuard? -->
+<!-- The SafeGuard feature of the Codenomicon's Defensics security testtools automatically tests the target system for weaknesses that compromise the integrity, privacy or safety. The SafeGuard is systematic solution to expose failed cryptographic certificate checks, privacy leaks or authentication bypass weaknesses that have exposed the Internet users to man in the middle attacks and eavesdropping. In addition to the Heartbleed bug the new Defensics TLS Safeguard feature can detect for instance the exploitable security flaw in widely used GnuTLS open source software implementing SSL/TLS functionality and the "goto fail;" bug in Apple's TLS/SSL implementation that was patched in February 2014. -->
 
 Who coordinates response to this vulnerability?
-Immediately after our discovery of the bug on 3rd of April 2014, NCSC-FI took up the task of verifying it, analyzing it further and reaching out to the authors of OpenSSL, software, operating system and appliance vendors, which were potentially affected. However, this vulnerability had been found and details released independently by others before this work was completed. Vendors should be notifying their users and service providers. Internet service providers should be notifying their end users where and when potential action is required.
+<!-- Immediately after our discovery of the bug on 3rd of April 2014, NCSC-FI took up the task of verifying it, analyzing it further and reaching out to the authors of OpenSSL, software, operating system and appliance vendors, which were potentially affected. However, this vulnerability had been found and details released independently by others before this work was completed. Vendors should be notifying their users and service providers. Internet service providers should be notifying their end users where and when potential action is required. -->
 
 
-The HeartBeat protocol extension is added to TLS for this reason. The HTTP keep-alive feature does the same but HB 
-protocol allows a client to perform this action at a much higher rate. I
+<!-- The HeartBeat protocol extension is added to TLS for this reason. The HTTP keep-alive feature does the same but HB protocol allows a client to perform this action at a much higher rate. -- -->
 
-Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package. In a way, it is a bit like a virtual machine. But unlike a virtual machine, rather than creating a whole virtual operating system, Docker allows applications to use the same Linux kernel as the system that they're running on and only requires applications be shipped with things not already running on the host computer
+<!-- Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package. In a way, it is a bit like a virtual machine. But unlike a virtual machine, rather than creating a whole virtual operating system, Docker allows applications to use the same Linux kernel as the system that they're running on and only requires applications be shipped with things not already running on the host computer -- -->
 ## Scénario théorique du protocole Heartbeat
 
-
+L'extension Heartbeat est l'équivalent de la fonctionnalité HTTP keep-alive cependant Heartbeat est compatible avec le protocole TLS pour les sites HTTPS et envoie à une cadence beaucoup plus élevé.
 L'usage habituelle de ce protocole Heartbeat permet : A un client de vérifier que le serveur répond de manière régulière, il y a deux paramètres, le premier le nombre de caractères, et le second une chaînes de caractères par exemple un mot.
 
 
@@ -224,6 +223,14 @@ Les premières estimations sont environ 600000 serveurs vulnérables avec OpenSS
 
 
 ## Mise en place du scénario général de détection et de protection
+Tout d'abord un IDPS peut détecter la faille Heartbleed, en comparant la taille du paquet et le nombre de requêtes, mais il est limité car le paquet est chiffrée. 
+De plus l'IDPS, va comparer la taille du paquet lors de la requête et lors de la réponse pour s'assurer que la demande n'est pas malicieuse.
+<!-- Néanmoins l'IDPS sera pas capable de rejeter les paquets, sauf s'ils bloquent tous les paquets Heartbleed.** -->
+
+
+
+
+
 Nous lançons dans un premier temps le **serveur Splunk** pour analyser les différents logs générés par le firewall qui est aussi l'IDPS.
 
 L'appareil firewall intègre Snort qui est un IDPS open-source, nous utilisons ces logs générés pour analyser, créer des visualisations des logs sous forme de statistiques et d'alertes.
@@ -234,6 +241,10 @@ Grâce à ce serveur Splunk, nous sommes en mesure de surveiller le trafic en un
 
 
 Ensuite, nous lançons la collecte des données sur l'Universal Forwarder, cela permet de collecter les logs et de transmettre vers le serveur Splunk depuis l'hôte **firewall**. Splunk collecte les résultats de l'analyseur réseau tcpdump.
+
+
+
+
 
 
 ## Détails des commandes pour la mise en place du scénario général de détection et de protection
@@ -265,6 +276,11 @@ Enfin, on configure l'adresse IP de destination et on lance l'attaque : à l'aid
 Nous récupérons les requêtes du client, l'en-tête HTTPS ainsi que les identifiants échangés.
 
 Nous remarquons que Snort détecte aussi l'attaque probable d'une faille Heartbleed.
+
+
+
+Nous avons utilisé un conteneur Docker car Docker permet d'automatiser, de créer plus rapidement, d'optimiser les ressources car on ne virtualise pas tous le système en effet le noyau du système d'exploitation est partagée.
+
 
 
 ## Les prérequis pour les différents serveurs sont :
@@ -673,8 +689,12 @@ Nous avons
 Nous avons simulé sur GNS3 la maquette avant de réaliser les attaques.
 
 
+## glossaire
+
+RFC Request For Comments est un standard pour implémenter une fonctionnalité ou un protocole selon des documents décrivant les spécifications techniques.
 
 
+### usage de mobaxterm-macros-export--save tabs on bookmarks
 
 
 # annexes
