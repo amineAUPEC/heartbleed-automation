@@ -1,4 +1,4 @@
-##  install splunk-forwarder
+## Install splunk-forwarder
 go to https://www.splunk.com/en_us/download/universal-forwarder.html  
 sudo apt-get update -y  
 sudo apt-get install -y wget  
@@ -381,87 +381,107 @@ then config dashboards
 and panels
 
 ## splunk tcadump
-tcpdump --version
-su splunk
 
-cd etc/apps/
+```bash
+tcpdump --version  
 
-curl https://github.com/amineAUPEC/kavi_web_private/blob/main/amine_splunk_packages/ta-tcpdump-network-input-for-linux_002.tgz > ta-tcpdump-network-input-for-linux_002.tgz
+cd /opt/splunkforwarder/etc/apps/TA-tcpdump  
 
-splunk@debian10:-/etc/apps$ tar xfz /tmp/ta_tcpdump_0.0.2.tgz
+curl https://github.com/amineAUPEC/kavi_web_private/blob/main/amine_splunk_packages/ta-tcpdump-network-input-for-linux_002.tgz > ta-tcpdump-network-input-for-linux_002.tgz   
 
-sudo /home/etudiant/splunk/bin/splunk install app ta-tcpdump-network-input-for-linux_002.tgz -update 1 -auth admin:Vitrygtr2021*
-sudo /opt/splunkforwarder/bin/splunk  install app ta-tcpdump-network-input-for-linux_002.tgz -update 1 -auth admin:abcd1234
-
+tar xfz /tmp/ta_tcpdump_0.0.2.tgz
+```
 
 
-cd /opt/splunkforwarder/etc/apps/TA-tcpdump
-cd TA-tcpdump/
+sudo /home/etudiant/splunk/bin/splunk install app ta-tcpdump-network-input-for-linux_002.tgz -update 1 -auth admin:Vitrygtr2021*  
 
-mkdir local
+```bash
+sudo /opt/splunkforwarder/bin/splunk  install app ta-tcpdump-network-input-for-linux_002.tgz -update 1 -auth admin:abcd1234  
 
-cp default/inputs.conf local/
 
-vi local/inputs.conf
+
+cd /opt/splunkforwarder/etc/apps/TA-tcpdump  
+cd TA-tcpdump/  
+
+mkdir local  
+
+cp default/inputs.conf local/  
+
+vi local/inputs.conf  
 
 exit
+```
 
 
-cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
+
+<!-- cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/  
 
 
-systemctl daemon-reload
-systemctl disable tcpdump 
-systemctl stop tcpdump
-systemctl daemon-reload
-cd /etc/systemd/system/
-rm tcpdump.service
-rm /var/log/tcpdump.log
-systemctl daemon-reload
+systemctl daemon-reload  
+systemctl disable tcpdump   
+systemctl stop tcpdump  
+systemctl daemon-reload  
+cd /etc/systemd/system/  
+rm tcpdump.service  
+rm /var/log/tcpdump.log  
+systemctl daemon-reload   -->
 
 
-systemctl daemon-reload
-cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
-cd /etc/systemd/system/
-systemctl enable tcpdump 
-systemctl start tcpdump
-systemctl stop tcpdump
-sudo /opt/splunkforwarder/bin/splunk restart 
-systemctl daemon-reload
+<!-- systemctl daemon-reload   -->
+
+```bash
+cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/  
+cd /etc/systemd/system/  
+systemctl enable tcpdump   
+systemctl start tcpdump  
+systemctl stop tcpdump  
+sudo /opt/splunkforwarder/bin/splunk restart   
+systemctl daemon-reload  
 
 
-ps -aux | grep tcpdump
+ps -aux | grep tcpdump  
 
-cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump /etc/logrotate.d/
+cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump /etc/logrotate.d/  
 
-cat /etc/logrotate.d/tcpdump
+cat /etc/logrotate.d/tcpdump  
 
 
-su - splunk
 
-sudo /opt/splunkforwarder/bin/splunk restart 
+sudo /opt/splunkforwarder/bin/splunk restart
+```
 
-- splunk_server
-sudo /home/etudiant/splunk/bin/splunk restart
-sudo /home/etudiant/splunk/bin/splunk boot-enable
+
+- splunk_server  
+
+```bash
+sudo /home/etudiant/splunk/bin/splunk restart  
+sudo /home/etudiant/splunk/bin/splunk boot-enable  
+```
+
 
 
 
 - splunk dash
 
-index="*" source="/var/log/tcpdump.log"
-index="*" source="/var/log/tcpdump.log" tcpdump:port53
+
+```bash
+index="*" source="/var/log/tcpdump.log"  
+index="*" source="/var/log/tcpdump.log" tcpdump:port53  
+```
+
 
 - splunk UF to modify portrange
 
-cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
-nano /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
-cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path
+cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path  
+nano /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path  
+cat /opt/splunkforwarder/etc/apps/TA-tcpdump/bin/tcpdump.path  
 > /usr/sbin/tcpdump -pnns0 -i any -tttt
 >> /usr/sbin/tcpdump -pnns0 -i any -tttt port 53 and not host 127.0.0.1
 >> /usr/sbin/tcpdump -pnns0 -i any -tttt portrange 23-450 and not host 127.0.0.1
 
 
+
+```bash
 nano /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service 
 cp /opt/splunkforwarder/etc/apps/TA-tcpdump/README/tcpdump.service /etc/systemd/system/
 systemctl daemon-reload
@@ -482,6 +502,8 @@ cat /opt/splunkforwarder/var/log/splunk/splunkd.log
 sudo /opt/splunkforwarder/bin/splunk restart 
 
 cat /opt/splunkforwarder/var/log/splunk/splunkd.log | grep --binary-files=text 21:03
+```
+
 
 
 - recent inputs.conf
