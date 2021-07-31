@@ -551,7 +551,7 @@ Pour filtrer sur le port du protocole HTTPS
 
 <!-- Pour formater les requêtes DNS
 * sourcetype=tshark:port53 OR sourcetype=port53tttt src=* dest=*| fields dns_len query length reply_code Len message_type record_type transport | search message_type=QUERY | table * -->
-## *SNORT* restant ## Les règles locales de Snort :le fichier local.rules
+## **SNORT**  ## Les règles locales de Snort :le fichier local.rules
 
 Voici toutes nos règles Snort que l'on a appliqué :
 
@@ -663,7 +663,7 @@ Version du protocole TLS
 
 Réponse Heartbeat
 
-## *CHAP3A||CHAP4A||CHAP4B* ## version tls -----
+## **CHAP3A||CHAP4A||CHAP4B** ## version tls -----
 https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/cheatsheet/tls_version.md
 https://www.fatalerrors.org/index.php/a/secure-tls1.2-connection-process.html
 
