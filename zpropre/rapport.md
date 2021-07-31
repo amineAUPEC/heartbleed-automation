@@ -258,7 +258,7 @@ sudo /opt/splunkforwarder/bin/splunk restart
 
 
 
-## *CHAP4A* ##  Scénario général pour exploiter la vulnérabilité Heartbleed
+## **CHAP4A** ##  Scénario général pour exploiter la vulnérabilité Heartbleed
 
 On lance le serveur vulnérable avec OpenSSL dans notre cas suite à des problèmes pour rétrograder, nous avons décidé de passer par un conteneur Docker. Qui intègre aussi un serveur web Apache.
 
@@ -279,7 +279,7 @@ Nous avons utilisé un conteneur Docker car Docker permet d'automatiser, de cré
 
 
 
-## *CHAP4A* ## Les prérequis pour les différents serveurs sont :
+## **CHAP4A** ## Les prérequis pour les différents serveurs sont :
 - Attaquant
         - git 
         - docker:
@@ -291,19 +291,19 @@ Nous avons utilisé un conteneur Docker car Docker permet d'automatiser, de cré
         - python:
             - python1-2
             - python3
-## *CHAP4A* ## Les étapes sur le serveur vulnérable sont :
+## **CHAP4A** ## Les étapes sur le serveur vulnérable sont :
 On installe les paquets utiles à git et on clone https://github.com/amineAUPEC/heartbleed-automation
 
 On se déplace sur le répertoire : pour lancer docker-compose
 cd /home/etudiant/heartbleed-automation/bash/heartbleed-example/
 sudo docker-compose up -d
-## *CHAP4A* ## Les étapes sur la VM injection de données sont :  
+## **CHAP4A** ## Les étapes sur la VM injection de données sont :  
 Dans le répertoire /home/etudiant/heartbleed-example
 On lance stimulate_server :
 python stimulate_server.py -a 192.168.1.49
 
 
-## *CHAP4A* ## Les étapes sur la VM pentest pour attaquer le serveur :
+## **CHAP4A** ## Les étapes sur la VM pentest pour attaquer le serveur :
 
 
 
@@ -336,7 +336,7 @@ Cet exploit metasploit est détectée par l'IDPS.
 
 
 
-## *CHAP4A* ## Pour rétrograder OpenSSL -----
+## *CHAP4A -- Annexes* ## Pour rétrograder OpenSSL -----
 
 
 J'ai aussi essayer d'autre méthode afin de faire confiance à une source obsolète avec apt-key add 
