@@ -336,7 +336,7 @@ Cet exploit metasploit est détectée par l'IDPS.
 
 
 
-## *CHAP4A -- Annexes* ## Pour rétrograder OpenSSL -----
+## **CHAP4A -- Annexes** ## Pour rétrograder OpenSSL -----
 
 
 J'ai aussi essayer d'autre méthode afin de faire confiance à une source obsolète avec apt-key add 
@@ -360,7 +360,7 @@ openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server ex
 
 
 
-## *CHAP3A -- ANNEXES* ## une autre vulnérabilité d'OPENSSL ----
+## **CHAP3A -- ANNEXES** ## une autre vulnérabilité d'OPENSSL ----
 Une vulnérabilité a été trouvé dans OpenSSL et classée très critique. Snort Message: WEB-MISC SSLv2 openssl get shared cipher
 ## **CHAP 2 SPLUNK** : ## on installe splunk
 Nous augmenté de la taille de la partition de la VM Debian, ce qui permet d'avoir un plus grand disque dur.
@@ -691,7 +691,7 @@ Le paquet SSL précise bien la version TLS, la longueur, le type.
 
 
 
-## gestionnaire web de firewall
+## **OK** gestionnaire web de firewall
 Nous avions commencé à créer une interface de gestion web qui génère les règles iptables et permet de les visualiser rapidement et simplement.
 
 Toutefois nous l'avons abandonné car Snort gère la gestion du firewall afin de bloquer les paquets mais aussi par manque de temps, nous avons prioriser nos tâches en entreprise.
@@ -705,14 +705,14 @@ Toutefois nous l'avons abandonné car Snort gère la gestion du firewall afin de
 
 
 
-## usage de github workflows pour une intégration CI/CD !!
+## **OK** usage de github workflows pour une intégration CI/CD !!
 Nous avons 
 
-## GNS3 virtualisation
+## **OK** GNS3 virtualisation
 Nous avons simulé sur GNS3 la maquette avant de réaliser les attaques.
 
 
-## glossaire
+##  **OK** glossaire
 
 RFC Request For Comments est un standard pour implémenter une fonctionnalité ou un protocole selon des documents décrivant les spécifications techniques.
 
