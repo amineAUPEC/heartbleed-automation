@@ -64,12 +64,12 @@ https://www.synetis.com/la-faille-heartbleed/
 
 https://heartbleed.com/
 
+https://branchez-vous.com/2014/04/14/pour-mieux-comprendre-heartbleed/
 
-
-
+https://fr.gregersenartpoint.com/pages/13782-faq-what-is-heartbleed-vulnerability-and-how-to-protect-you
 ## heartbleed attaque
 https://asecuritysite.com/encryption/heart2
-
+https://github.com/Bengman/CTF-writeups/blob/master/Hackthebox/valentine.md
 
 
 ## heartbleed attaque : NSA
@@ -83,9 +83,14 @@ https://github.com/jas9reet/heartbleed-lab
 https://raw.githubusercontent.com/roflcer/heartbleed-vuln/master/attack.py
 https://www.exploit-db.com/docs/49313
 
+## sites vulnérables
+
+https://github.com/musalbas/heartbleed-masstest/blob/00f38986e8044ea8a4065b2e0524f3095f39837d/README.md#changes-on-april-11-1500-utc
+
 
 ### variante ticketbleed
 https://filippo.io/ticketbleed/
+
 
 
 ### fork openssl -- libressl par Google

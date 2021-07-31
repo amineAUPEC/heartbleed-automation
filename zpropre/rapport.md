@@ -134,7 +134,7 @@ Who coordinates response to this vulnerability?
 # rapport
 
 
-## *CHAP3A* ## Introduction faille Heartbleed du module Heartbeat
+## **CHAP3A** ## Introduction faille Heartbleed du module Heartbeat
 
 La faille Heartbleed, permet à des attaquants de récupérer le contenu de la RAM du serveur mais une autre variante permet de récupérer du côté du client.
 
@@ -155,7 +155,7 @@ Cet vulnérabilité Heartbleed est aussi connu sous la référénce CVE : CVE-20
 En effet la référence CVE (Common Vulnerabilities and Exposure est un standard afin de nommer les failles de sécurité par l'organisme MITRE.
 
 
-## *CHAP3A* ## Scénario théorique du protocole Heartbeat
+## **CHAP3A** ## Scénario théorique du protocole Heartbeat
 
 L'extension Heartbeat est l'équivalent de la fonctionnalité HTTP keep-alive cependant Heartbeat est compatible avec le protocole TLS pour les sites HTTPS et envoie à une cadence beaucoup plus élevé.
 L'usage habituelle de ce protocole Heartbeat permet : A un client de vérifier que le serveur répond de manière régulière, il y a deux paramètres, le premier le nombre de caractères, et le second une chaînes de caractères par exemple un mot.
@@ -187,7 +187,7 @@ L'attaquant envoie deux messages, il établit la connexion SSL : avec un paquet 
 Si l'exploit est un succès, on affiche le résultat du contenu de la mémoire du serveur est présenté à la manière d’un dump « hexdump ».
 
 
-## *CHAP3A* ## Les possibilités de cet exploit sont :
+## **CHAP3A** ## Les possibilités de cet exploit sont :
 De plus, il est possible de récupérer des informations sensibles comme les clefs privées associées aux certificats SSL utilisés pour chiffrer le trafic, des identifiants de connexion appartenant aux visiteurs d’un site, ou encore les en-têtes HTTP  qui contiennent les cookies de sessions ou l’authentification Basic permettant d’usurper l’identité d’un internaute.
 
 De plus l'équipe d'OpenSSL a été en mesure de récupérer des certificats X.509 qui est une norme assez courante pour les certificats CSR des sites HTTPS.
@@ -197,16 +197,16 @@ De plus, même le gestionnaire de mot de passe Lastpass a été impacté par cet
 
 
 
-## *CHAP3A* ## La portée de l'exploit Heartbeat/Heartbleed
+## **CHAP3A** ## La portée de l'exploit Heartbeat/Heartbleed
 
 <!-- Le protocole TLS comprend une fonctionnalité nommée Heartbeat. Il s’agit d’un mécanisme de type « écho », qui permet à l’une des extrémités d’une communication TLS – client ou serveur – d’envoyer à l’autre un message, que l’interlocuteur doit répéter en retour. Cette fonctionnalité permet de vérifier que la connexion chiffrée est toujours active. -->
 
 En outre, les VPN, les messageries instantanées ont été impactées, sauf que de nombreux sites détenus par des grands groupes ont été prévenus par OpenSSL, toutefois la faille a été révélée, un peu plus tôt, ce qui a posé des problèmes pour mettre en place un correctif de sécurité.
 
-Les premières estimations sont environ 600000 serveurs vulnérables avec OpenSSL. La majorité des serveurs ont été mis à jour, les serveurs restants ont leurs certificats révoqués.
+Les premières estimations sont d'environ 600 000 serveurs vulnérables avec OpenSSL. La majorité des serveurs ont été mis à jour, les serveurs restants ont leurs certificats révoqués.
 
 
-## *CHAP3A* ## Les bonnes pratiques pour éviter ce genre d'attaque sont : 
+## **CHAP3A** ## Les bonnes pratiques pour éviter ce genre d'attaque sont : 
 
 
 - De désactiver Heartbeat, si une mise à jour n'est pas possible en désactivant avec l'option ou en recompilant le programme.
@@ -360,7 +360,7 @@ openssl s_client -connect 192.168.1.139:44330 -tlsextdebug | grep "TLS server ex
 
 
 
-## *CHAP3A* ## une autre vulnérabilité d'OPENSSL ----
+## *CHAP3A -- ANNEXES* ## une autre vulnérabilité d'OPENSSL ----
 Une vulnérabilité a été trouvé dans OpenSSL et classée très critique. Snort Message: WEB-MISC SSLv2 openssl get shared cipher
 ## **CHAP 2 SPLUNK** : ## on installe splunk
 Nous augmenté de la taille de la partition de la VM Debian, ce qui permet d'avoir un plus grand disque dur.
@@ -649,7 +649,7 @@ Voici les options lorsque nous lançons la commande de Snort :
 
 
 
-## *CHAP3A||CHAP4A* ## Analyse du trafic réseau : Des paquets avec Wireshark
+## *CHAP3A||CHAP4A||CHAP4B* ## Analyse du trafic réseau : Des paquets avec Wireshark
 images [wireshark]
 C:\Users\Administrateur\Desktop\ptutmerge
 
@@ -663,7 +663,7 @@ Version du protocole TLS
 
 Réponse Heartbeat
 
-## *CHAP3A||CHAP4A* ## version tls -----
+## *CHAP3A||CHAP4A||CHAP4B* ## version tls -----
 https://github.com/amineAUPEC/heartbleed-automation/blob/e74c191b1fd59251cefbc6f20719d3718d0b61f6/cheatsheet/tls_version.md
 https://www.fatalerrors.org/index.php/a/secure-tls1.2-connection-process.html
 
