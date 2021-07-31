@@ -218,7 +218,7 @@ Les premières estimations sont d'environ 600 000 serveurs vulnérables avec Ope
 
 
 
-## *CHAP4B* ## Mise en place du scénario général de détection et de protection
+## **CHAP4B** ## Mise en place du scénario général de détection et de protection
 Tout d'abord un IDPS peut détecter la faille Heartbleed, en comparant la taille du paquet et le nombre de requêtes, mais il est limité car le paquet est chiffrée. 
 De plus l'IDPS, va comparer la taille du paquet lors de la requête et lors de la réponse pour s'assurer que la demande n'est pas malicieuse.
 <!-- Néanmoins l'IDPS sera pas capable de rejeter les paquets, sauf s'ils bloquent tous les paquets Heartbleed.** -->
@@ -243,7 +243,7 @@ Ensuite, nous lançons la collecte des données sur l'Universal Forwarder, cela 
 
 
 
-## *CHAP4B* ## Détails des commandes pour la mise en place du scénario général de détection et de protection
+## **CHAP4B** ## Détails des commandes pour la mise en place du scénario général de détection et de protection
 Snort a été lancé, avec cette commande :
 sudo /usr/sbin/snort -A fast -i enp0s3 -u snort -c /etc/snort/snort.conf 
 
