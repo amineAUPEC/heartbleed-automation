@@ -729,6 +729,20 @@ https://serverfault.com/questions/636770/snort-not-sending-alert-log-file-to-sys
 https://stackoverflow.com/questions/26246678/read-the-alert-log-from-snort
 
 
+# demo
+- Attaquant
+  - git 
+    - docker:
+        - docker-ce
+        - docker-compose
+- Pentester :
+    - git    
+    -  Pour les scripts  : stimulate-server.py (VM injection de donnée ou sur la même VM) -- heartbleed.py ou exploit.py
+        - python:
+            - python1-2
+            - python3
+
+
 
 # autres
 ## oublier annexes
