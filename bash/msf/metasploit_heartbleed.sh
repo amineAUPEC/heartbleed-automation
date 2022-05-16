@@ -1,8 +1,8 @@
 # installer metasploit
 
-curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
-  chmod 755 msfinstall && \
-  ./msfinstall -i -p "vitrygtr"
+sudo curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+  sudo chmod 755 msfinstall && \
+  sudo ./msfinstall -i -p "vitrygtr"
 
 ip="192.168.1.173"
 # ip="192.168.1.33"
